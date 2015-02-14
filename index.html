@@ -7,13 +7,22 @@
 </head>
 <body>
     <div id="title">
-        <p>Twivia</p>
+        <p>Tweetrivia</p>
     </div>
     <div>
         <br />
         <br />
-        <p id="timer">3</p>
+        <p id="timer">10</p>
         <br />
+		
+		<!-- Temporary elements for testing tweet retrieval -->
+
+		<div style="display:block; width:250px; margin: 10px auto 50px auto"> 	
+			<input type="button" id="tempButton" value="Get Tweet" style="display:block; float:left" onclick="getTweet()">
+			<input type="text" id="tempTextField" placeholder="Enter name of Twitter user" style="display:block; float:left">
+		</div>
+		<!---------------------------------------------------->
+		
         <div id="tweet">
             <p>Tweet goes here</p>
         </div>
