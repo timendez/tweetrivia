@@ -1,70 +1,46 @@
 function parseInit() {
    Parse.initialize("nAqwkduLZrl2V4x93yMbdoKvQmdkg1S9uQc5248N", "ImgGDYIe27jCXp91kAMvtkqylFHDKYzhVLIiC4BQ");
-   
-   //testing
-   test("@kanye", "music");
-   //saveAccount("@twentyOnePilots", "music");
 }
 
-
-function test(account, category) {
-   var CategoryObject = Parse.Object.extend("Category");
-   var categoryObject = new CategoryObject();
-   var arr = [];
-   var query = new Parse.Query("Category");
-   var music = "HELLO";
-   arr.push(account);
-   
-   categoryObject.save({music: arr}, {
-      success: function(object) {
-         //return true; //saved correctly to DB
-            alert("step 1 done");
-      },
-      error: function(error) {
-         //return false; //didn't save correctly to DB
-      }
-   });
-   
-   query.include(category);
-   
-   query.first({
-      success: function(object) {
-         alert(object.toSource());
-      },
-      error: function(object) {
-         alert("K");
-      }
-   });
-}
 
 //Used for saving a Twitter user's account name, along with category, in the database
+//saveAccount("@kanye", "music");
 function saveAccount(account, category) {
-   var CategoryObject = Parse.Object.extend("Category");
-   var categoryObject = new CategoryObject();
-   var arr = [];
-   var query = new Parse.Query("Category");
+   var AccountObject = Parse.Object.extend("Account");
+   var accountObject = new AccountObject();  
+   
+   
+   accountObject.save({"handle": account, "category": category}, {
+      success: function(object) {
+         return true; //saved correctly to DB
+      },
+      error: function(error) {
+         return false; //didn't save correctly to DB
+      }
+   });
+}
+
+
+function getChoices(category) {
+   var query = new Parse.Query("Account");
+   var handles;
    
    //Setting query to get all accounts within categories
-   query.include(category);
+   query.equalTo("category", category);
    
-   query.first({
+   query.find({
       success: function(object) { //Successfully retrieved data
       
          //Object = undefined signifies category does not exist
-         if(object !== undefined) {
-            arr = object;
+         if(object === undefined) {
+            return false;
          }
 
-         arr.push(account);
+         for(var i = 0; i < object.length; i++) {
+            handles.push(object[i].get("handle"));
+         }
          
-         categoryObject.save({category: arr}, {
-            success: function(object) {
-               return true; //saved correctly to DB
-            },
-            error: function(error) {
-               return false; //didn't save correctly to DB
-            }
-         });
+         return handles;
       },
       error: function (error) {
          return false; //DB down
