@@ -1,4 +1,38 @@
 var timeI, checkI;
+var timePerQuestion = 60;
+
+$(document).ready(function() {
+    //applicationOnlyAuth();
+});
+
+// following https://dev.twitter.com/oauth/application-only
+function applicationOnlyAuth() {
+	var consumerKey = "2jCvFchz3pa5CrVxTITm3DbJ0";
+	var consumerSecret = "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE";
+	var encodedConsumerKey = encodeURI(consumerKey);
+	var encodedConsumerSecret = encodeURI(consumerSecret);
+	var bearerTokenCredentials = window.btoa(encodedConsumerKey + ":" + encodedConsumerSecret);
+	alert("consumerKey=" + consumerKey + "\nencodedConsumerKey=" + encodedConsumerKey + "\nconsumerSecret=" + consumerSecret + "\nencodedConsumerSecret=" + encodedConsumerSecret + "\nbearerTokenCredentials=" + bearerTokenCredentials);
+	$.ajax({
+		type: "POST",
+		url: "https://api.twitter.com/oauth2/token",
+		headers: {
+			"Authorization": "Basic " + bearerTokenCredentials, 
+			"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
+		data: "content_type=client_credentials",
+		success: function(data, textStatus, jqXHR) {
+			alert("Authenticated client!");
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			alert("textStatus=" + textStatus + " errorThrown=" + errorThrown);
+		},
+		dataType: "json"
+	});
+}
+
+function getTweet() {
+	var user = $("#tempTextField").val();
+}
 
 function getTime(){
    var x = document.getElementById("timer");
@@ -23,7 +57,7 @@ function checkTime(){
 function start(){
    $("#mask2").addClass("hide");
    $("#popup2").addClass("hide");
-   document.getElementById("timer").innerHTML = 5;
+   document.getElementById("timer").innerHTML = timePerQuestion;
    timeI = window.setInterval(getTime, 1000);
    checkI = window.setInterval(checkTime, 1000);
 }
