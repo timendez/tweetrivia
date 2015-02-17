@@ -4,7 +4,7 @@ function parseInit() {
 
 
 //Used for saving a Twitter user's account name, along with category, in the database
-//saveAccount("@kanye", "music");
+//saveAccount("kanye", "music");
 function saveAccount(account, category) {
    var AccountObject = Parse.Object.extend("Account");
    var accountObject = new AccountObject();  
@@ -21,6 +21,8 @@ function saveAccount(account, category) {
 }
 
 
+//Returns four random celebrity Twitter accounts given a category
+//Returns false if unsuccessful
 function getChoices(category) {
    var query = new Parse.Query("Account");
    var handles;
@@ -40,10 +42,28 @@ function getChoices(category) {
             handles.push(object[i].get("handle"));
          }
          
-         return handles;
+         return getFour(handles);
       },
       error: function (error) {
          return false; //DB down
       }
    });
+}
+
+
+//Grabs and returns 4 random handles from all handles given
+function getFour(allHandles) {
+   var fourHandles;
+   
+   for(var i = 0; i < 4; i++) {
+      fourHandles[i] = allHandles[getRandomInt(0, allHandles.length)];
+   }
+   
+   return fourHandles;
+}
+
+
+//Generates a random integer between min and max
+function getRandomInt(min, max) {
+   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
