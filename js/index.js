@@ -1,33 +1,49 @@
 var timeI, checkI;
 var timePerQuestion = 60;
+var bearerToken;
 
 $(document).ready(function() {
-    //applicationOnlyAuth();
+    applicationOnlyAuth();
 });
 
 // following https://dev.twitter.com/oauth/application-only
 function applicationOnlyAuth() {
+	var cb = new Codebird;
+	cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
+	cb.__call(
+		"oauth2_token",
+		{},
+		function (reply) {
+			if(reply.token_type === "bearer") {
+				bearerToken = reply.access_token;
+				alert("bearerToken=" + bearerToken);
+			}
+		}
+	);
+	
+	
+/*
 	var consumerKey = "2jCvFchz3pa5CrVxTITm3DbJ0";
 	var consumerSecret = "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE";
 	var encodedConsumerKey = encodeURI(consumerKey);
 	var encodedConsumerSecret = encodeURI(consumerSecret);
 	var bearerTokenCredentials = window.btoa(encodedConsumerKey + ":" + encodedConsumerSecret);
-	alert("consumerKey=" + consumerKey + "\nencodedConsumerKey=" + encodedConsumerKey + "\nconsumerSecret=" + consumerSecret + "\nencodedConsumerSecret=" + encodedConsumerSecret + "\nbearerTokenCredentials=" + bearerTokenCredentials);
+	//alert("consumerKey=" + consumerKey + "\nencodedConsumerKey=" + encodedConsumerKey + "\nconsumerSecret=" + consumerSecret + "\nencodedConsumerSecret=" + encodedConsumerSecret + "\nbearerTokenCredentials=" + bearerTokenCredentials);
 	$.ajax({
 		type: "POST",
+		dataType: "json",
 		url: "https://api.twitter.com/oauth2/token",
-		headers: {
-			"Authorization": "Basic " + bearerTokenCredentials, 
-			"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
-		data: "content_type=client_credentials",
-		success: function(data, textStatus, jqXHR) {
-			alert("Authenticated client!");
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("textStatus=" + textStatus + " errorThrown=" + errorThrown);
-		},
-		dataType: "json"
+		headers: {"Authorization":"Basic " + bearerTokenCredentials},
+		contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		data: "grant_type=client_credentials"
+	})
+	.done(function(data, textStatus, jqXHR) {
+		alert("done");
+	})
+	.fail(function(jqXHR, textStatus, errorThrown) {
+		alert("fail\nstatus=" + jqXHR.status + "\nresponseText=" + jqXHR.responseText);
 	});
+*/
 }
 
 function getTweet() {
