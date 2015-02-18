@@ -1,11 +1,11 @@
 var timeI, checkI;
-var timePerQuestion = 60;
+var timePerQuestion = 20;
 var cb;
 var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
 var choices;
 
 $(document).ready(function() {
-	cb = new Codebird;
+	cb = new Codebird();
 	cb.setBearerToken(bearerToken);
 	parseInit();
     //applicationOnlyAuth();
@@ -18,13 +18,30 @@ function receiveChoices(receivedChoices) {
 	var random = getRandomInt(0,3);
 	var correct = choices[random];
 	
-	//alert("choices[0]=" + choices[0] + "\nchoices[1]=" + choices[1] + "\nchoices[2]=" + choices[2] + "\nchoices[3]=" + choices[3]);
-
-	// display choices on buttons
-	$("#choice1").html(choices[0]);
-	$("#choice2").html(choices[1]);
-	$("#choice3").html(choices[2]);
-	$("#choice4").html(choices[3]);
+	// get user pics to display on buttons with username
+	cb.__call(
+		"users_lookup",
+		"screen_name=" + choices[0] + "," + choices[1] + "," + choices[2] + "," + choices[3],
+		function (reply, rate_limit_status) {
+			if(reply !== undefined) {
+				// display usernames
+				$("#choice1").html(choices[0]);
+				$("#choice2").html(choices[1]);
+				$("#choice3").html(choices[2]);
+				$("#choice4").html(choices[3]);
+			
+				// display profile pic
+				$("#choice1").prepend("<img src='" + reply[0].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
+				$("#choice2").prepend("<img src='" + reply[1].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
+				$("#choice3").prepend("<img src='" + reply[2].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
+				$("#choice4").prepend("<img src='" + reply[3].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
+			}
+			else {
+				alert("Twitter API is not responding!");
+			}
+		},
+		true
+	);
 	
 	// get a tweet from the user we chose to be correct answer
 	getTweet(correct);
@@ -53,7 +70,8 @@ function applicationOnlyAuth() {
 		function (reply) {
 			if(reply.token_type === "bearer") {
 				bearerToken = reply.access_token;
-				alert("bearerToken=" + bearerToken);
+				cb.setBearerToken(reply.access_token);
+				//alert("bearerToken=" + bearerToken);
 			}
 		}
 	);
@@ -61,12 +79,13 @@ function applicationOnlyAuth() {
 
 function receiveTweet(tweet) {
 	$("#tweetText").html(tweet);
+	start();
 }
 
 function getTweet(user) {
 	cb.__call(
 		"search_tweets",
-		"q=" + user + "&count=25",
+		"q=from%3A" + user + "&count=25",
 		function (reply, rate_limit_status) {
 			console.log(rate_limit_status);
 			if(reply.statuses !== undefined) {
@@ -82,17 +101,17 @@ function getTweet(user) {
 
 function getTime(){
    var x = document.getElementById("timer");
-   var time = x.innerHTML
-   var y = parseInt(time) - 1;
+   var time = x.value;
+   var y = time - 1;
    if(y <=0){
       y = 0;
    }
-   x.innerHTML = y.toString();
+   x.value = y;
+   $("#timeLeftLabel").html("Time Remaining: " + y + " seconds");
 }
 
 function checkTime(){
-   var x = document.getElementById("timer").innerHTML;
-   x = parseInt(x)
+   var x = document.getElementById("timer").value;
    if(x <= 0){
       $("#mask").removeClass("hide");
       $("#popup").removeClass("hide");
@@ -103,10 +122,12 @@ function checkTime(){
 function start(){
    $("#mask2").addClass("hide");
    $("#popup2").addClass("hide");
-   document.getElementById("timer").innerHTML = timePerQuestion;
+   $("#timer").attr("min", 0);
+   $("#timer").attr("max", timePerQuestion);
+   $("#timer").attr("value", timePerQuestion);
+   $("#timeLeftLabel").html("Time Remaining: " + timePerQuestion + " seconds");
    timeI = window.setInterval(getTime, 1000);
    checkI = window.setInterval(checkTime, 1000);
-   loadNewQuestion();
 }
 function change(){
    $("#mask").addClass("hide");

@@ -12,7 +12,10 @@
     <div>
         <br />
         <br />
-        <p id="timer">60</p>
+			<div id="timeLeftDiv">
+				<div id="timeLeftLabel">Time Remaining: </div>
+				<meter id="timer"></meter>
+			</div>
         <br />
         <div id="tweet">
             <p id="tweetText">Tweet goes here</p>
@@ -36,7 +39,7 @@
 				<option value="music">Music</option>
 				<option value="corporation">Corporation</option>
                 <br />
-                <input type="button" value="Start" onclick="start()" class="button" />
+                <input type="button" value="Start" onclick="loadNewQuestion()" class="button" />
             </select>
         </div>
     </div>

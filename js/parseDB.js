@@ -54,9 +54,16 @@ function getChoices(category) {
 //Grabs and returns 4 random handles from all handles given
 function getFour(allHandles) {
    var fourHandles = [];
+   var usedIndexes = [];
+   var count = 0;
 
-   for(var i = 0; i < 4; i++) {
-      fourHandles[i] = allHandles[getRandomInt(0, allHandles.length - 1)];
+   while(count < 4) {
+	   var randomIndex = getRandomInt(0, allHandles.length - 1);
+	   if($.inArray(randomIndex, usedIndexes) == -1) {
+		   usedIndexes.push(randomIndex);
+		   fourHandles[count] = allHandles[randomIndex];
+		   count++;
+	   }
    }
 
    return fourHandles;
