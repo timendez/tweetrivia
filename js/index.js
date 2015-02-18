@@ -1,14 +1,51 @@
 var timeI, checkI;
 var timePerQuestion = 60;
-var bearerToken;
+var cb;
+var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
+var choices;
 
 $(document).ready(function() {
-    applicationOnlyAuth();
+	cb = new Codebird;
+	cb.setBearerToken(bearerToken);
+	parseInit();
+    //applicationOnlyAuth();
 });
+
+function receiveChoices(receivedChoices) {
+	choices = receivedChoices;
+	
+	// randomly select one to be the correct answer
+	var random = getRandomInt(0,3);
+	var correct = choices[random];
+	
+	//alert("choices[0]=" + choices[0] + "\nchoices[1]=" + choices[1] + "\nchoices[2]=" + choices[2] + "\nchoices[3]=" + choices[3]);
+
+	// display choices on buttons
+	$("#choice1").html(choices[0]);
+	$("#choice2").html(choices[1]);
+	$("#choice3").html(choices[2]);
+	$("#choice4").html(choices[3]);
+	
+	// get a tweet from the user we chose to be correct answer
+	getTweet(correct);
+	
+	// the rest of the process is continued in the receiveTweet()
+	// function called by the callback in getTweet
+}
+
+function loadNewQuestion() {
+	// get category user selected
+	var selectedCategory = $("#category option:selected").val();
+
+	// get 4 Twitter account names from the selected category
+	getChoices(selectedCategory);
+	
+	// the rest of the process continues when receiveChoices() is
+	// called from the callback inside getChoices
+}
 
 // following https://dev.twitter.com/oauth/application-only
 function applicationOnlyAuth() {
-	var cb = new Codebird;
 	cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
 	cb.__call(
 		"oauth2_token",
@@ -20,34 +57,27 @@ function applicationOnlyAuth() {
 			}
 		}
 	);
-	
-	
-/*
-	var consumerKey = "2jCvFchz3pa5CrVxTITm3DbJ0";
-	var consumerSecret = "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE";
-	var encodedConsumerKey = encodeURI(consumerKey);
-	var encodedConsumerSecret = encodeURI(consumerSecret);
-	var bearerTokenCredentials = window.btoa(encodedConsumerKey + ":" + encodedConsumerSecret);
-	//alert("consumerKey=" + consumerKey + "\nencodedConsumerKey=" + encodedConsumerKey + "\nconsumerSecret=" + consumerSecret + "\nencodedConsumerSecret=" + encodedConsumerSecret + "\nbearerTokenCredentials=" + bearerTokenCredentials);
-	$.ajax({
-		type: "POST",
-		dataType: "json",
-		url: "https://api.twitter.com/oauth2/token",
-		headers: {"Authorization":"Basic " + bearerTokenCredentials},
-		contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-		data: "grant_type=client_credentials"
-	})
-	.done(function(data, textStatus, jqXHR) {
-		alert("done");
-	})
-	.fail(function(jqXHR, textStatus, errorThrown) {
-		alert("fail\nstatus=" + jqXHR.status + "\nresponseText=" + jqXHR.responseText);
-	});
-*/
 }
 
-function getTweet() {
-	var user = $("#tempTextField").val();
+function receiveTweet(tweet) {
+	$("#tweetText").html(tweet);
+}
+
+function getTweet(user) {
+	cb.__call(
+		"search_tweets",
+		"q=" + user + "&count=25",
+		function (reply, rate_limit_status) {
+			console.log(rate_limit_status);
+			if(reply.statuses !== undefined) {
+				receiveTweet(reply.statuses[getRandomInt(0,24)].text);
+			}
+			else {
+				alert("Twitter API is not responding!");
+			}
+		},
+		true
+	);
 }
 
 function getTime(){
@@ -76,6 +106,7 @@ function start(){
    document.getElementById("timer").innerHTML = timePerQuestion;
    timeI = window.setInterval(getTime, 1000);
    checkI = window.setInterval(checkTime, 1000);
+   loadNewQuestion();
 }
 function change(){
    $("#mask").addClass("hide");

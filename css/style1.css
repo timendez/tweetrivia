@@ -22,7 +22,7 @@
    text-align:center;
 }
 
-#choice{
+.choiceButton{
    max-width:300px;
    max-height:50px;
    min-height:50px;
