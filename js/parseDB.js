@@ -56,7 +56,7 @@ function getFour(allHandles) {
    var fourHandles = [];
 
    for(var i = 0; i < 4; i++) {
-      fourHandles[i] = allHandles[getRandomInt(0, allHandles.length)];
+      fourHandles[i] = allHandles[getRandomInt(0, allHandles.length - 1)];
    }
 
    return fourHandles;
