@@ -25,24 +25,24 @@ function saveAccount(account, category) {
 //Returns false if unsuccessful
 function getChoices(category) {
    var query = new Parse.Query("Account");
-   var handles;
-   
+   var handles = [];
+
    //Setting query to get all accounts within categories
    query.equalTo("category", category);
    
    query.find({
       success: function(object) { //Successfully retrieved data
-      
+
          //Object = undefined signifies category does not exist
          if(object === undefined) {
             return false;
          }
 
          for(var i = 0; i < object.length; i++) {
-            handles.push(object[i].get("handle"));
+            handles[i] = object[i].get("handle");
          }
-         
-         return getFour(handles);
+
+         receiveChoices(getFour(handles));
       },
       error: function (error) {
          return false; //DB down
@@ -53,12 +53,12 @@ function getChoices(category) {
 
 //Grabs and returns 4 random handles from all handles given
 function getFour(allHandles) {
-   var fourHandles;
-   
+   var fourHandles = [];
+
    for(var i = 0; i < 4; i++) {
       fourHandles[i] = allHandles[getRandomInt(0, allHandles.length)];
    }
-   
+
    return fourHandles;
 }
 
