@@ -135,15 +135,16 @@ function start(){
    checkI = window.setInterval(checkTime, 1000);
 }
 function change(){
-   $("#mask").addClass("hide");
    $("#popup").addClass("hide");
-   $("#mask2").removeClass("hide");
-   $("#popup3").removeClass("hide");
+   $("#popup2").removeClass("hide");
+   clearInterval(timeI);
+   clearInterval(checkI);
+   $("#timer").attr("value", timePerQuestion);
 }
 function restart(){
    $("#mask").addClass("hide");
    $("#popup").addClass("hide");
-   $("#popup3").addClass("hide");
+   $("#popup2").addClass("hide");
    $("#timer").attr("value", timePerQuestion);
    loadNewQuestion();
 }
