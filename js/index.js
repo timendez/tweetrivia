@@ -11,12 +11,13 @@ $(document).ready(function() {
     //applicationOnlyAuth();
 });
 
+var correct = null;
 function receiveChoices(receivedChoices) {
 	choices = receivedChoices;
 	
 	// randomly select one to be the correct answer
 	var random = getRandomInt(0,3);
-	var correct = choices[random];
+	correct = choices[random];
 	
 	// get user pics to display on buttons with username
 	cb.__call(
@@ -102,20 +103,21 @@ function getTweet(user) {
 	);
 }
 
-function getTime(){
-   var x = document.getElementById("timer");
-   var time = x.value;
+function getTime() {
+   var time = $("#timer").attr("value");
    var y = time - 1;
    if(y <=0){
       y = 0;
    }
-   x.value = y;
+   $("#timer").attr("value", y);
    $("#timeLeftLabel").html("Time Remaining: " + y + " seconds");
 }
 
 function checkTime(){
-   var x = document.getElementById("timer").value;
-   if(x <= 0){
+   var x = $("#timer").attr("value");
+   if (x <= 0) {
+      document.getElementById("text").innerHTML = "Time's Up!"
+      document.getElementById("finalScore").innerHTML = ""
       $("#mask").removeClass("hide");
       $("#popup").removeClass("hide");
       clearInterval(timeI);
@@ -123,7 +125,7 @@ function checkTime(){
    }
 }
 function start(){
-   $("#mask2").addClass("hide");
+   $("#mask").addClass("hide");
    $("#popup2").addClass("hide");
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
@@ -136,15 +138,39 @@ function change(){
    $("#mask").addClass("hide");
    $("#popup").addClass("hide");
    $("#mask2").removeClass("hide");
-   $("#popup2").removeClass("hide");
+   $("#popup3").removeClass("hide");
 }
 function restart(){
    $("#mask").addClass("hide");
    $("#popup").addClass("hide");
-   document.getElementById("timer").innerHTML = 5;
-   timeI = window.setInterval(getTime, 1000);
-   checkI = window.setInterval(checkTime, 1000);
+   $("#popup3").addClass("hide");
+   $("#timer").attr("value", timePerQuestion);
+   loadNewQuestion();
 }
 
-function answer(str){
+function answer(str) {
+    value = document.getElementById(str).innerHTML;
+    res = value.split(">");
+    ans = res[res.length - 1];
+    ans = ans.replace(" ", "");
+    if (ans.localeCompare(correct) == 0) {
+        score = document.getElementById("scoreVal").innerHTML;
+        score++;
+        document.getElementById("scoreVal").innerHTML = score;
+        $("#timer").attr("value", timePerQuestion);
+        clearInterval(timeI);
+        clearInterval(checkI);
+        loadNewQuestion();
+    }
+    else {
+        score = document.getElementById("scoreVal").innerHTML;
+        document.getElementById("text").innerHTML = "Wrong Answer!"
+        document.getElementById("finalScore").innerHTML = "Score: " + score;
+        $("#timer").attr("value", timePerQuestion);
+        document.getElementById("scoreVal").innerHTML = 0;
+        clearInterval(timeI);
+        clearInterval(checkI);
+        $("#mask").removeClass("hide");
+        $("#popup").removeClass("hide");
+    }
 }

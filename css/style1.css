@@ -2,6 +2,7 @@
 {
     background-color: #00CCFF;
 }
+
 #title{
     text-align:center;
     font-style:bold;
@@ -47,7 +48,21 @@
 	width: 400px;
 	height: 30px;
 }
-
+#scoreDiv {
+    display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	width: 400px;
+	height: 30px;
+}
+#score{
+    float: left;
+}
+#scoreVal{
+    float:right;
+    margin-right: 300px;
+}
 #timeLeftLabel {
 	display: block;
 	margin-left: auto;
