@@ -151,7 +151,8 @@ function answer(str) {
     ans = res[res.length - 1];
     ans = ans.replace(" ", "");
     if (ans.localeCompare(correct) == 0) {
-        score = document.getElementById("scoreVal").innerHTML + 1;
+        score = document.getElementById("scoreVal").innerHTML;
+        score++;
         document.getElementById("scoreVal").innerHTML = score;
         $("#timer").attr("value", timePerQuestion);
         clearInterval(timeI);
@@ -163,6 +164,7 @@ function answer(str) {
         document.getElementById("text").innerHTML = "Wrong Answer!"
         document.getElementById("finalScore").innerHTML = "Score: " + score;
         $("#timer").attr("value", timePerQuestion);
+        document.getElementById("scoreVal").innerHTML = 0;
         clearInterval(timeI);
         clearInterval(checkI);
         $("#mask").removeClass("hide");
