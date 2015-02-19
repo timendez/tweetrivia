@@ -89,6 +89,9 @@ function getTweet(user) {
 		function (reply, rate_limit_status) {
 			console.log(rate_limit_status);
 			if(reply.statuses !== undefined) {
+				if(reply.statuses.length == 0) {
+					loadNewQuestion();
+				}
 				receiveTweet(reply.statuses[getRandomInt(0,reply.statuses.length)].text);
 			}
 			else {
