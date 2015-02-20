@@ -198,6 +198,7 @@ function statusChangeCallback(response) {
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
     }
+    location.reload();
   }
 
   // This function is called when someone finishes with the Login
