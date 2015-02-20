@@ -22,6 +22,9 @@
     margin-right: auto;
     background-color: white;
 }
+#status {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 #mc{
    text-align:center;
 }
@@ -55,13 +58,16 @@
 	padding: 0px;
 	width: 400px;
 	height: 30px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 #score{
     float: left;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 #scoreVal{
     float:right;
     margin-right: 300px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 #timeLeftLabel {
 	display: block;
