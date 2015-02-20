@@ -22,6 +22,10 @@
     margin-right: auto;
     background-color: white;
 }
+#status {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size:2px; 
+}
 #mc{
    text-align:center;
 }
