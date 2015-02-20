@@ -176,7 +176,7 @@ function answer(str) {
         $("#popup").removeClass("hide");
     }
 
-    
+
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
