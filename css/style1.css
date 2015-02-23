@@ -1,35 +1,46 @@
-﻿body
-{
-    background-color: #00CCFF;
+﻿body {
+   background-color: #00CCFF;
 }
 
-#title{
-    text-align:center;
-    font-style:bold;
-    font-size:30px;  
-	font-family: "Comic Sans MS", cursive, sans-serif;
-	letter-spacing: 2px;
-    background-color: white;
+#title {
+   text-align:center;
+   font-style:bold;
+   font-size:30px;  
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   letter-spacing: 2px;
+   background-color: white;
 }
-#tweet{
-    max-width: 400px;
-    max-height:150px;
-    min-height:150px;
-    min-width:400px;
-    text-align:center;
-	font-family: "Comic Sans MS", cursive, sans-serif;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
+
+#tweet {
+   max-width: 400px;
+   max-height:150px;
+   min-height:150px;
+   min-width:400px;
+   text-align:center;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   margin-left: auto;
+   margin-right: auto;
+   background-color: white;
 }
+
+#tweetText {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
 #status {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+   font-family: "Comic Sans MS", cursive, sans-serif;
 }
-#mc{
+
+#mc {
    text-align:center;
 }
 
-.choiceButton{
+.choiceButton {
    max-width:300px;
    max-height:50px;
    min-height:50px;
@@ -38,42 +49,47 @@
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 1.5em;
 }
-#timer{
-	width: 400px;
-	height: 20px;
+
+#timer {
+   width: 400px;
+   height: 20px;
 }
 
 #timeLeftDiv {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	width: 400px;
-	height: 30px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 0px;
+   width: 400px;
+   height: 30px;
 }
+
 #scoreDiv {
-    display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px;
-	width: 400px;
-	height: 30px;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 0px;
+   width: 400px;
+   height: 30px;
+   font-family: "Comic Sans MS", cursive, sans-serif;
 }
-#score{
-    float: left;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+
+#score {
+   float: left;
+   font-family: "Comic Sans MS", cursive, sans-serif;
 }
-#scoreVal{
-    float:right;
-    margin-right: 300px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+
+#scoreVal {
+   float:right;
+   margin-right: 300px;
+   font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
 #timeLeftLabel {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: "Comic Sans MS", cursive, sans-serif;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .profilepic {
