@@ -2,6 +2,32 @@ function parseInit() {
    Parse.initialize("nAqwkduLZrl2V4x93yMbdoKvQmdkg1S9uQc5248N", "ImgGDYIe27jCXp91kAMvtkqylFHDKYzhVLIiC4BQ");
 }
 
+//Given a category, builds an array of
+//{user, highscore} objects, in descending order.
+//Used to populate the leaderboards
+function getTopScores(category) {
+   var numToGet = 10;
+   var query = new Parse.Query("Highscore");
+   var results = [];
+   
+   query.equalTo("category", category);
+   query.addDescending("highscore");
+   query.count(numToGet);
+   
+   query.find({
+      success: function(objectArr) {
+         for(var i = 0; i < objectArr.length; i++) {
+            results.push({objectArr[i].get("user"), objectArr[i].get("highscore"}));
+         }
+         //functionCall(results, category);
+         //TODO Call function elsewhere (i.e. receiveTopScores(category))
+      },
+      error: function(object) {
+         return false;
+      }
+   });
+}
+
 
 //Given a user, category, and current score, checks if new high score
 //Returns the highest score, and whether it is a previous high score, or a new one
