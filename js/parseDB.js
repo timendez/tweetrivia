@@ -3,6 +3,72 @@ function parseInit() {
 }
 
 
+//Given a user, category, and current score, checks if new high score
+//Returns the highest score, and whether it is a previous high score, or a new one
+// {"status": "old",
+//  "score": highscore}
+// OR
+// {"status": "new",
+//  "score": highscore}
+function checkHighscore(user, category, currentScore) {
+   var query = new Parse.Query("Highscore");
+   
+   query.equalTo("user", user);
+   query.equalTo("category", category);
+   
+   query.first({
+      success: function(object) {
+         var dbHighscore = object.get("highscore");
+         
+         if(dbHighscore === undefined) {
+            return currentScore;
+         }
+         //TODO Call function elsewhere rather than return (i.e. have a receivecheckHighscore())
+         //return dbHighscore >= currentScore ? {"status": "old", "score": dbHighscore} : {"status": "new", "score": currentScore};
+      },
+      error: function(object) {
+         return false;
+      }
+   });
+}
+
+
+//Returns the high score value of user in a specific category
+//Should be used to build the leaderboard
+function getHighScore(user, category) {
+   var query = new Parse.Query("Highscore");
+   
+   query.equalTo("user", user);
+   query.equalTo("category", category);
+   
+   query.first({
+      success: function(object) {
+         //TODO Call function elsewhere rather than return
+         //return object.get("highscore");
+      },
+      error: function(object) {
+         return false;
+      }
+   });
+}
+
+
+//Saves the user, category, and highscore in the database
+function saveHighScore(user, category, highscore) {
+   var HighscoreObject = Parse.Object.extend("Highscore");
+   var highscoreObject = new HighscoreObject();
+
+   highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
+      success: function(object) {
+         return true; //saved correctly to DB
+      },
+      error: function(error) {
+         return false; //didn't save correctly to DB
+      }
+   });
+}
+
+
 //Used for saving a Twitter user's account name, along with category, in the database
 //saveAccount("kanye", "music");
 function saveAccount(account, category) {
