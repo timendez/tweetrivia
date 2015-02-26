@@ -245,6 +245,10 @@ function statusChangeCallback(response) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+  function Logout(){
+    FB.logout(function () { document.location.reload(); });
+  }
+
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
@@ -252,9 +256,10 @@ function statusChangeCallback(response) {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Hi ' + response.name + '!';
- 		document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
+      str = 'Hi ' + response.name + '!'; 
+      str += "<input type='button' value='Logout' onclick='Logout();'/>";
+      document.getElementById('status').innerHTML = str;
+      document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
      userIDg = response.id;
     });
   }
