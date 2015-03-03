@@ -254,6 +254,7 @@ function statusChangeCallback(response) {
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Hi ' + response.name + '!';
+        location.reload();
  		document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
      userIDg = response.id;
     });
