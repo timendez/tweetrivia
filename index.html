@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>Tweetrivia</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     <link href="css/style1.css" rel=" stylesheet" type="text/css"/>
     <link href="css/endGame.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="parseInit();">
         <p id="status" align="right"></p>
        <p align="right">
           <fb:login-button scope="public_profile,email" align="right" onlogin="checkLoginState();">
@@ -14,6 +15,11 @@
     <div id="title">
         <p>Tweetrivia</p>
     </div>
+    
+    <a id="highscores" href="leaderboard.html">
+      High Scores
+    </a>
+    
     <div>
         <br />
            <div id="scoreDiv">
@@ -64,8 +70,8 @@
         </div>
     </div>
 
-    <script src="http://www.parsecdn.com/js/parse-1.3.4.min.js" type="text/javascript"></script>
-    <script src="js/parseDB.js" type="text/javascript"></script>
+   <script src="http://www.parsecdn.com/js/parse-1.3.4.min.js" type="text/javascript"></script>
+   <script src="js/parseDB.js" type="text/javascript"></script>
 	<script src="js/codebird.js" type="text/javascript"></script>
 	<script src="js/index.js" type="text/javascript"></script>
 </body>
