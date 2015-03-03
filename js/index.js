@@ -65,7 +65,7 @@ function loadNewQuestion() {
 
 // following https://dev.twitter.com/oauth/application-only
 function applicationOnlyAuth() {
-	cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
 	cb.__call(
 		"oauth2_token",
 		{},
