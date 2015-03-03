@@ -6,11 +6,55 @@
     <link href="css/endGame.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login">
+    <form>
+        PIN: <br>
+        <input type="text" name="pin" id = "PINFIELD"> 
+        <input type="submit" value="submit" onclick="return getPin();" />
+    </form>
+    <script type="text/javascript">
+        document.getElementById("login").onclick = function() {myFunction()};
+        function myFunction() {
+            var cb = new Codebird;
+            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+            cb.setToken("354493489-qlgE4S6K0pESTnTOANu6fBBcVYd3Z5RrarOlXHye", "I88fpikVYWg16YRa3tRlS1BlLGqxhKRwFw13PaodPcRhI");
+        
+        cb.__call(
+            "oauth_authorize",
+            {},
+            function (auth_url) {
+                window.codebird_auth = window.open(auth_url);
+            }
+        );
+        cb.__call(
+            "oauth_accessToken",
+            {oauth_verifier: document.getElementById("PINFIELD").value},
+            function (reply) {
+                // store the authenticated token, which may be different from the request token (!)
+                cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+            }
+        );
+        cb.__call(
+            "statuses_update",
+            {"status": "Whohoo, I just tweeted!"},
+            function (reply) {
+        // ...
+            }
+        );
+    }
+    </script>
+
         <p id="status" align="right"></p>
        <p align="right">
           <fb:login-button scope="public_profile,email" align="right" onlogin="checkLoginState();">
           </fb:login-button>
         </p>
+         <img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login">
+    <form>
+        PIN: <br>
+        <input type="text" name="pin" id = "PINFIELD"> 
+        <input type="submit" value="submit" onclick="return getPin();" />
+    </form>
     <div id="title">
         <p>Tweetrivia</p>
     </div>
