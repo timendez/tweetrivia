@@ -13,14 +13,15 @@ function getTopScores(category) {
    query.equalTo("category", category);
    query.addDescending("highscore");
    query.count(numToGet);
-   
+
    query.find({
       success: function(objectArr) {
          for(var i = 0; i < objectArr.length; i++) {
-            results.push({objectArr[i].get("user"), objectArr[i].get("highscore"}));
+            results.push([objectArr[i].get("user"), objectArr[i].get("highscore")]);
          }
-         //functionCall(results, category);
-         //TODO Call function elsewhere (i.e. receiveTopScores(category))
+
+         //FRONTEND CALL - populates the leaderboard
+         receiveTopScores(results, category);
       },
       error: function(object) {
          return false;

@@ -1,0 +1,20 @@
+table, td {
+   border: 2px solid black;
+}
+
+table {
+   color:white;
+   font-family: Tahoma, sans-serif;
+   font-weight: bold;
+   margin-left: 2.5%;
+   padding-left: .5%;
+   padding-right: .5%;
+   float: left;
+   
+   /* Outline */
+   text-shadow:
+   -1px -1px 0 #000,
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+   1px 1px 0 #000;
+}
