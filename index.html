@@ -17,7 +17,13 @@
         function myFunction() {
             var cb = new Codebird;
             cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
-            cb.setToken("354493489-qlgE4S6K0pESTnTOANu6fBBcVYd3Z5RrarOlXHye", "I88fpikVYWg16YRa3tRlS1BlLGqxhKRwFw13PaodPcRhI");
+            cb.__call(
+    "oauth_requestToken",
+    {oauth_callback: "oob"},
+    function (reply) {
+        // stores it
+        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+    });
         
         cb.__call(
             "oauth_authorize",
