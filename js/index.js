@@ -255,6 +255,8 @@ function statusChangeCallback(response) {
       document.getElementById('status').innerHTML =
         'Hi ' + response.name + '!';
         location.reload();
+        location.reload();
+
  		document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
      userIDg = response.id;
     });
