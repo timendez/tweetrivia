@@ -16,8 +16,10 @@
         document.getElementById("login").onclick = function() {myFunction()};
         function myFunction() {
             var cb = new Codebird;
-            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
-         $("#login").click(function(){
+        cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
+        //cb.setToken("403332774-Fn288SA96MuJnd6OzMyRWtjLyoZ509TLiLwTv6pl", "XyMg5eHaf5ahQHKle72EPruXgJx4ifUq2VAmG1j5xCbnD");
+
+        $("#login").click(function(){
         cb.__call(
             "oauth_requestToken",
             {oauth_callback: "oob"},
@@ -37,6 +39,13 @@
             }
         );
         });
+        cb.__call(
+    "statuses_update",
+    {"status": "Whohoo, I just tweeted!"},
+    function (reply) {
+        // ...
+    }
+);
     }
     </script>
 
