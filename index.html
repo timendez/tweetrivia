@@ -6,9 +6,46 @@
     <link href="css/endGame.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-          <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-        <div id="status">hello</div>
+    <img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login">
+    <form>
+        PIN: <br>
+        <input type="text" name="pin" id = "PINFIELD"> 
+        <input type="submit" value="submit" onclick="return getPin();" />
+    </form>
+    <script type="text/javascript">
+        document.getElementById("login").onclick = function() {myFunction()};
+        function myFunction() {
+            var cb = new Codebird;
+            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+         $("#login").click(function(){
+        cb.__call(
+            "oauth_requestToken",
+            {oauth_callback: "oob"},
+            function (reply) {
+            // stores it
+            cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+
+            // gets the authorize screen URL
+            cb.__call(
+                    "oauth_authorize",
+                    {},
+                    function (auth_url) {
+                           window.open(auth_url, "Sign into Twitter");
+                    }
+            );
+            
+            }
+        );
+        });
+    }
+    </script>
+
+        <p id="status" align="right"></p>
+       <p align="right">
+          <fb:login-button scope="public_profile,email" align="right" onlogin="checkLoginState();">
+          </fb:login-button>
+        </p>
+         
     <div id="title">
         <p>Tweetrivia</p>
     </div>

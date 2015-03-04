@@ -65,7 +65,7 @@ function loadNewQuestion() {
 
 // following https://dev.twitter.com/oauth/application-only
 function applicationOnlyAuth() {
-	cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
+            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
 	cb.__call(
 		"oauth2_token",
 		{},
@@ -176,7 +176,7 @@ function answer(str) {
         $("#popup").removeClass("hide");
     }
 
-    
+
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -254,9 +254,7 @@ function statusChangeCallback(response) {
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Hi ' + response.name + '!';
-        $("#alarms").html("");
-
-     getAllAlarms(response.id);
+ 		document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
      userIDg = response.id;
     });
   }
