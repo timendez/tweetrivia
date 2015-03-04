@@ -17,36 +17,26 @@
         function myFunction() {
             var cb = new Codebird;
             cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+         $("#login").click(function(){
+        cb.__call(
+            "oauth_requestToken",
+            {oauth_callback: "oob"},
+            function (reply) {
+            // stores it
+            cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+
+            // gets the authorize screen URL
             cb.__call(
-    "oauth_requestToken",
-    {oauth_callback: "oob"},
-    function (reply) {
-        // stores it
-        cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-    });
-        
-        cb.__call(
-            "oauth_authorize",
-            {},
-            function (auth_url) {
-                window.codebird_auth = window.open(auth_url);
+                    "oauth_authorize",
+                    {},
+                    function (auth_url) {
+                           window.open(auth_url, "Sign into Twitter");
+                    }
+            );
+            
             }
         );
-        cb.__call(
-            "oauth_accessToken",
-            {oauth_verifier: document.getElementById("PINFIELD").value},
-            function (reply) {
-                // store the authenticated token, which may be different from the request token (!)
-                cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-            }
-        );
-        cb.__call(
-            "statuses_update",
-            {"status": "Whohoo, I just tweeted!"},
-            function (reply) {
-        // ...
-            }
-        );
+        });
     }
     </script>
 
