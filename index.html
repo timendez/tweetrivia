@@ -37,7 +37,6 @@ function myFunction() {
             $("#login").click(function(){
                 cb.__call(
                 "oauth_requestToken",
-                {oauth_callback: "oob"},
                 function (reply) {
                     // stores it
                     cb.setToken(reply.oauth_token, reply.oauth_token_secret);
