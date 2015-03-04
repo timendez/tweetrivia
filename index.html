@@ -39,6 +39,24 @@
             }
         );
         });
+
+        function getPin() {
+        alert("Submit button clicked!");
+        var cb = new Codebird;
+        cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
+        
+        cb.__call(
+            "oauth_accessToken",
+            {oauth_verifier: document.getElementById("PINFIELD").value},
+            function (reply) {
+            // store the authenticated token, which may be different from the request token (!)
+                cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+                alert(reply.oauth_token+" "+ document.getElementById("PINFIELD").value);
+            }
+        );
+    
+
+
         cb.__call(
     "statuses_update",
     {"status": "Whohoo, I just tweeted!"},
@@ -46,6 +64,7 @@
         // ...
     }
 );
+    }
     }
     </script>
 
