@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login">
+    <form>
+        PIN: <br>
+        <input type="text" name="pin" id = "PINFIELD"> 
+    </form>
+    <p> ---- </p>
+    <button onclick="getPin()">Submit</button> 
+    <button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello World";
+}
+
+function getPin() {
+    alert(document.getElementById("PINFIELD").value);
+        alert("Submit button clicked!");
+}
+</script>
+</body>
+</html>
