@@ -41,7 +41,6 @@ function callback(){
     cb.__call(
         "oauth_accessToken",
         {
-            console.log(localStorage["verifier"]);
             oauth_verifier: localStorage["verifier"]
         },
         function (reply) {
