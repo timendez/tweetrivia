@@ -6,29 +6,18 @@ function redirectInit() {
    }
    alert(params['oauth_verifier']+" first");
 
-     var current_url = location.toString();
-  var query       = current_url.match(/\?(.+)$/).split("&amp;");
-  var parameters  = {};
-  var parameter;
-
-  for (var i = 0; i < query.length; i++) {
-    parameter = query[i].split("=");
-    if (parameter.length === 1) {
-        parameter[1] = "";
-    }
-    parameters[decodeURIComponent(parameter[0])] = decodeURIComponent(parameter[1]);
-  }
-  alert(parameters.oauth_verifier+" second");
    //Check if there is an access token 
    if(params['oauth_verifier']) {
       localStorage["verifier"] =  params['oauth_verifier'];
+      alert("before callBack");
       window.opener.callBack();
+      alert("no callBack");
   }
    window.close()
 }
 
 
-function redirectInit2() {
+/*function redirectInit2() {
   var cb          = new Codebird;
   var current_url = location.toString();
   var query       = current_url.match(/\?(.+)$/).split("&amp;");
@@ -64,6 +53,6 @@ function redirectInit2() {
         }
     );
   }
-}
+}*/
 
 window.onload = redirectInit;
