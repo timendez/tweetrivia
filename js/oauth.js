@@ -48,7 +48,8 @@ function callback(){
             console.log(reply.oauth_token_secret);
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
             console.log(reply);
-            alert(reply.data.screen_name+ " got the access token!");
+            console.log(reply.screen_name);
+            alert(reply.data.screen_name + " got the access token!");
 
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
