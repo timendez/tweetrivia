@@ -2,6 +2,7 @@ var callBack;
 
 function init(json){
    callBack = json.callback_function;
+   alert("init");
 }
 function loginTwitter() {
             var cb = new Codebird;
