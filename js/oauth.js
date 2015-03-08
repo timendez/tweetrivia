@@ -41,10 +41,14 @@ function callback(){
     cb.__call(
         "oauth_accessToken",
         {
+            console.log(localStorage["verifier"]);
             oauth_verifier: localStorage["verifier"]
         },
         function (reply) {
+            console.log(reply.oauth_token);
+            console.log(reply.oauth_token_secret);
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+            console.log(reply);
             alert(reply.data.screen_name+ " got the access token!");
 
             // if you need to persist the login after page reload,
