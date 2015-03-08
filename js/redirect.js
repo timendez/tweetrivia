@@ -4,6 +4,21 @@ function redirectInit() {
    while (m = regex.exec(queryString)) {
       params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
    }
+   alert(params['oauth_verifier']+" first");
+
+     var current_url = location.toString();
+  var query       = current_url.match(/\?(.+)$/).split("&amp;");
+  var parameters  = {};
+  var parameter;
+
+  for (var i = 0; i < query.length; i++) {
+    parameter = query[i].split("=");
+    if (parameter.length === 1) {
+        parameter[1] = "";
+    }
+    parameters[decodeURIComponent(parameter[0])] = decodeURIComponent(parameter[1]);
+  }
+  alert(parameters.oauth_verifier+" second");
    //Check if there is an access token 
    if(params['oauth_verifier']) {
       localStorage["verifier"] =  params['oauth_verifier'];

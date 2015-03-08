@@ -31,7 +31,8 @@ function loginTwitter() {
         }
 
 function callback(){
-
+    var cb = new Codebird;
+    cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
     // assign stored request token parameters to codebird here
     // ...
     cb.setToken(localStorage["token"], localStorage["tokenSecret"]);
