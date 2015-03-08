@@ -9,9 +9,7 @@ function redirectInit() {
    //Check if there is an access token 
    if(params['oauth_verifier']) {
       localStorage["verifier"] =  params['oauth_verifier'];
-      alert("before callBack");
       window.opener.callBack();
-      alert("no callBack");
   }
    window.close()
 }
