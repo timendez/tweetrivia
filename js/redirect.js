@@ -4,7 +4,6 @@ function redirectInit() {
    while (m = regex.exec(queryString)) {
       params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
    }
-   alert(params['oauth_verifier']+" first");
 
    //Check if there is an access token 
    if(params['oauth_verifier']) {

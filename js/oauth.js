@@ -2,7 +2,6 @@ var callBack;
 
 function init(json){
    callBack = json.callback_function;
-   alert("init");
 }
 function loginTwitter() {
             var cb = new Codebird;
@@ -44,12 +43,8 @@ function callback(){
             oauth_verifier: localStorage["verifier"]
         },
         function (reply) {
-            console.log(reply.oauth_token);
-            console.log(reply.oauth_token_secret);
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-            console.log(reply);
-            console.log(reply.screen_name);
-            alert(reply.data.screen_name + " got the access token!");
+            alert(reply.screen_name + " got the access token!");
 
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
