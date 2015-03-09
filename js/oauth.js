@@ -45,7 +45,7 @@ function callback(){
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
             alert(reply.screen_name + " got the access token!");
-            document.getElementById('username').innerHTML = "Hi "+ reply.screen_name;
+            document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
 
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
