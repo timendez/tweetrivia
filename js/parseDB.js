@@ -50,8 +50,8 @@ function checkHighscore(user, category, currentScore) {
          if(dbHighscore === undefined) {
             return currentScore;
          }
-         //TODO Call function elsewhere rather than return (i.e. have a receivecheckHighscore())
-         //return dbHighscore >= currentScore ? {"status": "old", "score": dbHighscore} : {"status": "new", "score": currentScore};
+         
+         dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
       },
       error: function(object) {
          return false;
