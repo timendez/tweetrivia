@@ -153,32 +153,34 @@ function restart(){
 }
 
 function answer(str) {
-    value = document.getElementById(str).innerHTML;
-    res = value.split(">");
-    ans = res[res.length - 1];
-    ans = ans.replace(" ", "");
-    if (ans.localeCompare(correct) == 0) {
-        score = document.getElementById("scoreVal").innerHTML;
-        score++;
-        document.getElementById("scoreVal").innerHTML = score;
-        $("#timer").attr("value", timePerQuestion);
-        clearInterval(timeI);
-        clearInterval(checkI);
-        loadNewQuestion();
-    }
-    else {
-        score = document.getElementById("scoreVal").innerHTML;
-        document.getElementById("text").innerHTML = "Wrong Answer!"
-        document.getElementById("finalScore").innerHTML = "Score: " + score;
-        $("#timer").attr("value", timePerQuestion);
-        document.getElementById("scoreVal").innerHTML = 0;
-        clearInterval(timeI);
-        clearInterval(checkI);
-        $("#mask").removeClass("hide");
-        $("#popup").removeClass("hide");
+   value = document.getElementById(str).innerHTML;
+   res = value.split(">");
+   ans = res[res.length - 1];
+   ans = ans.replace(" ", "");
+
+   if (ans.localeCompare(correct) == 0) {
+      score = document.getElementById("scoreVal").innerHTML;
+      score++;
+      document.getElementById("scoreVal").innerHTML = score;
+      $("#timer").attr("value", timePerQuestion);
+      clearInterval(timeI);
+      clearInterval(checkI);
+      loadNewQuestion();
+   }
+   else {
+      score = document.getElementById("scoreVal").innerHTML;
+      document.getElementById("text").innerHTML = "Wrong Answer!"
+      document.getElementById("finalScore").innerHTML = "Score: " + score;
+      $("#timer").attr("value", timePerQuestion);
+      document.getElementById("scoreVal").innerHTML = 0;
+      clearInterval(timeI);
+      clearInterval(checkI);
+      $("#mask").removeClass("hide");
+      $("#popup").removeClass("hide");
+
       alert("user = " + username);
       checkHighscore(username, selectedCategory, score);
-    }
+   }
 }
 
 function updateHighscore(status, score) {
