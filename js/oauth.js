@@ -46,7 +46,7 @@ function callback(){
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
             username = reply.screen_name;
-            setUser(reply.screen_name);
+            $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
         }
