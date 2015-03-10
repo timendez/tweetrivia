@@ -87,7 +87,6 @@ function getHighScore(user, category) {
 
 //Saves the user, category, and highscore in the database
 function saveHighscore(user, category, highscore) {
-Parse.initialize("nAqwkduLZrl2V4x93yMbdoKvQmdkg1S9uQc5248N", "ImgGDYIe27jCXp91kAMvtkqylFHDKYzhVLIiC4BQ");
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
