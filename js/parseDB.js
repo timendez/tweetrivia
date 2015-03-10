@@ -43,7 +43,7 @@ function checkHighscore(user, category, currentScore) {
    query.equalTo("user", user);
    query.equalTo("category", category);
    
-   if(user !== undefined && user !== null && isNaN(parseInt(currentScore))) {
+   if(user !== undefined && user !== null && !isNaN(parseInt(currentScore))) {
       query.first({
          success: function(object) {
             var dbHighscore;
