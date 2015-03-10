@@ -5,7 +5,7 @@ function init(json){
 }
 function loginTwitter() {
             var cb = new Codebird;
-            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+            cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
 
             $("#login").click(function(){
                 cb.__call(
@@ -32,7 +32,7 @@ function loginTwitter() {
 
 function callback(){
     var cb = new Codebird;
-    cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
+    cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
     // assign stored request token parameters to codebird here
     // ...
     cb.setToken(localStorage["token"], localStorage["tokenSecret"]);
@@ -45,7 +45,8 @@ function callback(){
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
-
+            username = reply.screen_name;
+            $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
         }

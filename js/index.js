@@ -1,9 +1,11 @@
 var timeI, checkI;
 var timePerQuestion = 20;
-var cb;
+var cb; //codebird object
 var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
 var choices;
 var userIDg = null;
+var username;
+var selectedCategory;
 
 $(document).ready(function() {
 	cb = new Codebird();
@@ -54,7 +56,7 @@ function receiveChoices(receivedChoices) {
 
 function loadNewQuestion() {
 	// get category user selected
-	var selectedCategory = $("#category option:selected").val();
+	selectedCategory = $("#category option:selected").val();
 
 	// get 4 Twitter account names from the selected category
 	getChoices(selectedCategory);
@@ -123,6 +125,11 @@ function checkTime(){
       $("#popup").removeClass("hide");
       clearInterval(timeI);
       clearInterval(checkI);
+      
+      if(username === undefined)
+         alert("Please login with Twitter");
+      else
+         checkHighscore(username, selectedCategory, score);
    }
 }
 function start(){
@@ -151,30 +158,43 @@ function restart(){
 }
 
 function answer(str) {
-    value = document.getElementById(str).innerHTML;
-    res = value.split(">");
-    ans = res[res.length - 1];
-    ans = ans.replace(" ", "");
-    if (ans.localeCompare(correct) == 0) {
-        score = document.getElementById("scoreVal").innerHTML;
-        score++;
-        document.getElementById("scoreVal").innerHTML = score;
-        $("#timer").attr("value", timePerQuestion);
-        clearInterval(timeI);
-        clearInterval(checkI);
-        loadNewQuestion();
-    }
-    else {
-        score = document.getElementById("scoreVal").innerHTML;
-        document.getElementById("text").innerHTML = "Wrong Answer!"
-        document.getElementById("finalScore").innerHTML = "Score: " + score;
-        $("#timer").attr("value", timePerQuestion);
-        document.getElementById("scoreVal").innerHTML = 0;
-        clearInterval(timeI);
-        clearInterval(checkI);
-        $("#mask").removeClass("hide");
-        $("#popup").removeClass("hide");
-    }
+   value = document.getElementById(str).innerHTML;
+   res = value.split(">");
+   ans = res[res.length - 1];
+   ans = ans.replace(" ", "");
+
+   if (ans.localeCompare(correct) == 0) {
+      score = document.getElementById("scoreVal").innerHTML;
+      score++;
+      document.getElementById("scoreVal").innerHTML = score;
+      $("#timer").attr("value", timePerQuestion);
+      clearInterval(timeI);
+      clearInterval(checkI);
+      loadNewQuestion();
+   }
+   else {
+      score = document.getElementById("scoreVal").innerHTML;
+      document.getElementById("text").innerHTML = "Wrong Answer!"
+      document.getElementById("finalScore").innerHTML = "Score: " + score;
+      $("#timer").attr("value", timePerQuestion);
+      document.getElementById("scoreVal").innerHTML = 0;
+      clearInterval(timeI);
+      clearInterval(checkI);
+      $("#mask").removeClass("hide");
+      $("#popup").removeClass("hide");
+
+      if(username === undefined)
+         alert("Please login with Twitter");
+      else
+         checkHighscore(username, selectedCategory, score);
+   }
+}
+
+function updateHighscore(status, score) {
+   if(status === "new" && score > 0) {
+      alert("New high score for " + username + "! " + score);
+   }
+}
 
 
 function statusChangeCallback(response) {
@@ -200,67 +220,66 @@ function statusChangeCallback(response) {
     }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+// This function is called when someone finishes with the Login
+// Button.  See the onlogin handler attached to it in the sample
+// code below.
+function checkLoginState() {
+ FB.getLoginStatus(function(response) {
+   statusChangeCallback(response);
+ });
+}
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '895378573826197',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.1
-  });
+window.fbAsyncInit = function() {
+FB.init({
+ appId      : '895378573826197',
+ cookie     : true,  // enable cookies to allow the server to access 
+                     // the session
+ xfbml      : true,  // parse social plugins on this page
+ version    : 'v2.1' // use version 2.1
+});
 
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
+// Now that we've initialized the JavaScript SDK, we call 
+// FB.getLoginStatus().  This function gets the state of the
+// person visiting this page and can return one of three states to
+// the callback you provide.  They can be:
+//
+// 1. Logged into your app ('connected')
+// 2. Logged into Facebook, but not your app ('not_authorized')
+// 3. Not logged into Facebook and can't tell if they are logged into
+//    your app or not.
+//
+// These three cases are handled in the callback function.
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+FB.getLoginStatus(function(response) {
+ statusChangeCallback(response);
+});
 
-  };
+};
 
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+// Load the SDK asynchronously
+(function(d, s, id) {
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s); js.id = id;
+ js.src = "//connect.facebook.net/en_US/sdk.js";
+ fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
-  function Logout(){
-    FB.logout(function () { document.location.reload(); });
-  }
+function Logout(){
+ FB.logout(function () { document.location.reload(); });
+}
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
+// Here we run a very simple test of the Graph API after login is
+// successful.  See statusChangeCallback() for when this call is made.
+function testAPI() {
 
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      str = 'Hi ' + response.name + '!'; 
-      str += "<input type='button' value='Logout' onclick='Logout();'/>";
-      document.getElementById('status').innerHTML = str;
-      document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
-     userIDg = response.id;
-    });
-  }
+ console.log('Welcome!  Fetching your information.... ');
+ FB.api('/me', function(response) {
+   console.log('Successful login for: ' + response.name);
+   str = 'Hi ' + response.name + '!'; 
+   str += "<input type='button' value='Logout' onclick='Logout();'/>";
+   document.getElementById('status').innerHTML = str;
+   document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
+  userIDg = response.id;
+ });
 }

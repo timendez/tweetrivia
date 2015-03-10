@@ -43,15 +43,48 @@ function checkHighscore(user, category, currentScore) {
    query.equalTo("user", user);
    query.equalTo("category", category);
    
+   if(user !== undefined && user !== null && !isNaN(parseInt(currentScore))) {
+      query.first({
+         success: function(object) {
+            var dbHighscore;
+            
+            if(object === undefined) {
+               //First score entered
+               saveHighscore(user, category, currentScore);
+               updateHighscore("new", currentScore);
+            }
+            else {
+               //Already existing score
+               dbHighscore = object.get("highscore");
+               
+               if(dbHighscore >= currentScore) {
+                  updateHighscore("old", dbHighscore)
+               }
+               else {
+                  deleteHighscore(user, category);
+                  saveHighscore(user, category, currentScore);
+                  updateHighscore("new", currentScore);
+               }
+            }
+         },
+         error: function(object) {
+            return false;
+         }
+      });
+   }
+}
+
+
+//Removes a previous highscore, given the user and the category
+function deleteHighscore(user, category) {
+   var query = new Parse.Query("Highscore");
+   
+   query.equalTo("user", user);
+   query.equalTo("category", category);
+
    query.first({
       success: function(object) {
-         var dbHighscore = object.get("highscore");
-         
-         if(dbHighscore === undefined) {
-            return currentScore;
-         }
-         //TODO Call function elsewhere rather than return (i.e. have a receivecheckHighscore())
-         //return dbHighscore >= currentScore ? {"status": "old", "score": dbHighscore} : {"status": "new", "score": currentScore};
+         object.destroy({});
       },
       error: function(object) {
          return false;
@@ -81,15 +114,17 @@ function getHighScore(user, category) {
 
 
 //Saves the user, category, and highscore in the database
-function saveHighScore(user, category, highscore) {
+function saveHighscore(user, category, highscore) {
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
-   highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
+
+   highscoreObject.save({"user": user, "category": category, "highscore": parseInt(highscore)}, {
       success: function(object) {
          return true; //saved correctly to DB
       },
       error: function(error) {
+         alert("Error: Could not save to database");
          return false; //didn't save correctly to DB
       }
    });
