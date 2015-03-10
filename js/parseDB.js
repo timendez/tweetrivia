@@ -78,11 +78,14 @@ function deleteHighscore(user, category) {
    
    query.equalTo("user", user);
    query.equalTo("category", category);
+   alert("delete");
    query.first({
       success: function(object) {
+         alert("object destroyed");
          object.destroy({});
       },
       error: function(object) {
+      alert("error in destroying");
          return false;
       }
    });
