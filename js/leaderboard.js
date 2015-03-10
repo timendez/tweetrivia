@@ -1,6 +1,7 @@
 function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
+   getTopScores("corporation");
 }
 
 function receiveTopScores(results, category) {
