@@ -91,7 +91,7 @@ function saveHighscore(user, category, highscore) {
    var highscoreObject = new HighscoreObject();
 
    alert("in save");
-   highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
+   highscoreObject.save({"user": user, "category": category, "highscore": parseInt(highscore)}, {
       success: function(object) {
       alert("successful save");
          return true; //saved correctly to DB
