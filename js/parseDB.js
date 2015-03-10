@@ -48,11 +48,12 @@ function checkHighscore(user, category, currentScore) {
          var dbHighscore;
          
          if(object === undefined) {
-            //deleteHighscore(user, category);
+            //First score entered
             saveHighscore(user, category, currentScore);
             updateHighscore("new", currentScore);
          }
          else {
+            //Already existing score
             dbHighscore = object.get("highscore");
             
             if(dbHighscore >= currentScore) {
@@ -78,14 +79,13 @@ function deleteHighscore(user, category) {
    
    query.equalTo("user", user);
    query.equalTo("category", category);
-   alert("delete");
+
    query.first({
       success: function(object) {
          alert("object destroyed");
          object.destroy({});
       },
       error: function(object) {
-      alert("error in destroying");
          return false;
       }
    });
