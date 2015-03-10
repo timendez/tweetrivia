@@ -187,7 +187,7 @@ function answer(str) {
 
 function updateHighscore(status, score) {
    if(status === "new") {
-      alert("New high score for " + username + "!");
+      alert("New high score for " + username + "! " + score);
    }
 }
 

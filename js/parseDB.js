@@ -61,7 +61,7 @@ function checkHighscore(user, category, currentScore) {
             }
             else {
                //deleteHighscore(user, category);
-               saveHighscore(user, category, dbHighscore);
+               saveHighscore(user, category, currentScore);
                updateHighscore("new", currentScore);
             }
          }
