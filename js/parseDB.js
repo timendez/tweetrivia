@@ -90,12 +90,14 @@ function saveHighscore(user, category, highscore) {
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
+   alert("in save");
    highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
       success: function(object) {
       alert("successful save");
          return true; //saved correctly to DB
       },
       error: function(error) {
+      alert("error");
       alert("error code: " + JSON.parse(error));
          return false; //didn't save correctly to DB
       }
