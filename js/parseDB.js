@@ -87,18 +87,17 @@ function getHighScore(user, category) {
 
 //Saves the user, category, and highscore in the database
 function saveHighscore(user, category, highscore) {
-alert("saving highscore2");
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
+   alert("user = " + user + "\ncategory = " + category + "\nhigscore = " + highscore);
    highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
       success: function(object) {
       alert("successful save");
          return true; //saved correctly to DB
       },
       error: function(error) {
-      alert("error save");
-      alert("error code: " + error);
+      alert("error code: " + error.message);
          return false; //didn't save correctly to DB
       }
    });
