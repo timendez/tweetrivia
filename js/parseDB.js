@@ -48,7 +48,7 @@ function checkHighscore(user, category, currentScore) {
          var dbHighscore;
          
          if(object === undefined) {
-            alert("saving highscore");
+            deleteHighscore(user, category);
             saveHighscore(user, category, currentScore);
             updateHighscore("new", currentScore);
          }
@@ -59,10 +59,29 @@ function checkHighscore(user, category, currentScore) {
                updateHighscore("old", dbHighscore)
             }
             else {
+               deleteHighscore(user, category);
                saveHighscore(user, category, dbHighscore);
                updateHighscore("new", currentScore);
             }
          }
+      },
+      error: function(object) {
+         return false;
+      }
+   });
+}
+
+
+//Removes a previous highscore, given the user and the category
+function deleteHighScore(user, category) {
+   var query = new Parse.Query("Highscore");
+   
+   query.equalTo("user", user);
+   query.equalTo("category", category);
+   
+   query.first({
+      success: function(object) {
+         object.destroy({});
       },
       error: function(object) {
          return false;
