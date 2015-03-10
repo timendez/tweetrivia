@@ -48,16 +48,15 @@ function checkHighscore(user, category, currentScore) {
          var dbHighscore;
          
          if(object === undefined) {
+            alert("saving highscore");
             saveHighscore(user, category, currentScore);
             updateHighscore("new", currentScore);
          }
          else {
             dbHighscore = object.get("highscore");
             saveHighscore(user, category, dbHighscore);
-            updateHighscore("old", dbHighscore)
+            dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
          }
-
-         dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
       },
       error: function(object) {
          return false;
@@ -88,14 +87,18 @@ function getHighScore(user, category) {
 
 //Saves the user, category, and highscore in the database
 function saveHighscore(user, category, highscore) {
+alert("saving highscore2");
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
    highscoreObject.save({"user": user, "category": category, "highscore": highscore}, {
       success: function(object) {
+      alert("successful save");
          return true; //saved correctly to DB
       },
       error: function(error) {
+      alert("error save");
+      alert("error code: " + error);
          return false; //didn't save correctly to DB
       }
    });
