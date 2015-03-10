@@ -126,7 +126,10 @@ function checkTime(){
       clearInterval(timeI);
       clearInterval(checkI);
       
-      checkHighscore(username, selectedCategory, score);
+      if(username === undefined)
+         alert("Please login with Twitter");
+      else
+         checkHighscore(username, selectedCategory, score);
    }
 }
 function start(){
@@ -180,8 +183,10 @@ function answer(str) {
       $("#mask").removeClass("hide");
       $("#popup").removeClass("hide");
 
-      alert("score is " + score);
-      checkHighscore(username, selectedCategory, score);
+      if(username === undefined)
+         alert("Please login with Twitter");
+      else
+         checkHighscore(username, selectedCategory, score);
    }
 }
 
