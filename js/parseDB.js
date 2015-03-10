@@ -60,7 +60,7 @@ function checkHighscore(user, category, currentScore) {
                updateHighscore("old", dbHighscore)
             }
             else {
-               //deleteHighscore(user, category);
+               deleteHighscore(user, category);
                saveHighscore(user, category, currentScore);
                updateHighscore("new", currentScore);
             }
