@@ -180,6 +180,7 @@ function answer(str) {
       $("#mask").removeClass("hide");
       $("#popup").removeClass("hide");
 
+      alert("score is " + score);
       checkHighscore(username, selectedCategory, score);
    }
 }
