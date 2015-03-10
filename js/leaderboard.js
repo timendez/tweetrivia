@@ -1,3 +1,5 @@
+var username;
+
 function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
