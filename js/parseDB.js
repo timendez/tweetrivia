@@ -48,7 +48,7 @@ function checkHighscore(user, category, currentScore) {
          var dbHighscore;
          
          if(object === undefined) {
-            deleteHighscore(user, category);
+            //deleteHighscore(user, category);
             saveHighscore(user, category, currentScore);
             updateHighscore("new", currentScore);
          }
@@ -59,7 +59,7 @@ function checkHighscore(user, category, currentScore) {
                updateHighscore("old", dbHighscore)
             }
             else {
-               deleteHighscore(user, category);
+               //deleteHighscore(user, category);
                saveHighscore(user, category, dbHighscore);
                updateHighscore("new", currentScore);
             }
