@@ -45,13 +45,20 @@ function checkHighscore(user, category, currentScore) {
    
    query.first({
       success: function(object) {
-alert("success");      
-         var dbHighscore = object.get("highscore");
-alert("dbHighscore " + dbHighscore);
-         if(dbHighscore === undefined) {
+         var dbHighscore;
+         
+         if(object === undefined) {
+         alert("UNEDF YO score = " + currentScore);
             updateHighscore("new", currentScore);
          }
+         else {
+            dbHighscore = object.get("highscore");
+            alert("dbHighscore " + dbHighscore);
+         }
+
+         
 alert("thissin");
+
          dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
       },
       error: function(object) {
