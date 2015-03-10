@@ -47,15 +47,14 @@ function checkHighscore(user, category, currentScore) {
       success: function(object) {
 alert("success");      
          var dbHighscore = object.get("highscore");
-         
+alert("dbHighscore " + dbHighscore);
          if(dbHighscore === undefined) {
-            return currentScore;
+            updateHighscore("new", currentScore);
          }
-         
+alert("thissin");
          dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
       },
       error: function(object) {
-         alert("error");
          return false;
       }
    });
