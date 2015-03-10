@@ -73,12 +73,11 @@ function checkHighscore(user, category, currentScore) {
 
 
 //Removes a previous highscore, given the user and the category
-function deleteHighScore(user, category) {
+function deleteHighscore(user, category) {
    var query = new Parse.Query("Highscore");
    
    query.equalTo("user", user);
    query.equalTo("category", category);
-   
    query.first({
       success: function(object) {
          object.destroy({});
