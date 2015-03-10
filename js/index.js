@@ -178,7 +178,6 @@ function answer(str) {
       $("#mask").removeClass("hide");
       $("#popup").removeClass("hide");
 
-      alert("user = " + username);
       checkHighscore(username, selectedCategory, score);
    }
 }

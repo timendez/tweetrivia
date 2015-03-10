@@ -45,6 +45,7 @@ function checkHighscore(user, category, currentScore) {
    
    query.first({
       success: function(object) {
+alert("success");      
          var dbHighscore = object.get("highscore");
          
          if(dbHighscore === undefined) {
@@ -54,6 +55,7 @@ function checkHighscore(user, category, currentScore) {
          dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
       },
       error: function(object) {
+         alert("error");
          return false;
       }
    });
