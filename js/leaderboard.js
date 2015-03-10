@@ -5,25 +5,31 @@ function populateLeaderboards() {
    getTopScores("actor");
    getTopScores("corporation");
    
-   try {
-      username = document.URL.substring(document.URL.indexOf("?user=") + 6);
-   }
-   catch(err) {
-      //user did not click on leaderboard link
-   }
+   var indexOfUser = document.URL.indexOf("?user=");
+   var urlIndexPadding = 6;
    
-   if(username !== undefined)
-      alert(username);
-   else
-      alert("weak");
+   if(indexOfUser !== -1)
+      username = document.URL.substring(indexOfUser + urlIndexPadding);
 }
 
 function receiveTopScores(results, category) {
    var tableResults = "";
 
-   for(var i = 0; i < results.length; i++) {
-      tableResults += "<tr><td>" + results[i][0] + "</td><td>" + results[i][1] + "</td></tr>"
+   if(username === undefined) {
+      for(var i = 0; i < results.length; i++) {
+         tableResults += "<tr><td>" + results[i][0] + "</td><td>" + results[i][1] + "</td></tr>";
+      }
    }
-
+   else {
+      for(var i = 0; i < results.length; i++) {
+         if(results[i][0] === username) {
+            tableResults += "<tr><td .currentUser=" + username + ">" + results[i][0] + "</td><td .currentUser=" + username + ">" + results[i][1] + "</td></tr>";
+         }
+         else {
+            tableResults += "<tr><td>" + results[i][0] + "</td><td>" + results[i][1] + "</td></tr>";
+         }
+      }
+   }
+   
    $("#" + category + "TR").after(tableResults);
 }
