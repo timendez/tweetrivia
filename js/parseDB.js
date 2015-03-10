@@ -43,33 +43,35 @@ function checkHighscore(user, category, currentScore) {
    query.equalTo("user", user);
    query.equalTo("category", category);
    
-   query.first({
-      success: function(object) {
-         var dbHighscore;
-         
-         if(object === undefined) {
-            //First score entered
-            saveHighscore(user, category, currentScore);
-            updateHighscore("new", currentScore);
-         }
-         else {
-            //Already existing score
-            dbHighscore = object.get("highscore");
+   if(user !== undefined && user !== null && currentScore !== undefined && currentScore !== null) {
+      query.first({
+         success: function(object) {
+            var dbHighscore;
             
-            if(dbHighscore >= currentScore) {
-               updateHighscore("old", dbHighscore)
-            }
-            else {
-               deleteHighscore(user, category);
+            if(object === undefined) {
+               //First score entered
                saveHighscore(user, category, currentScore);
                updateHighscore("new", currentScore);
             }
+            else {
+               //Already existing score
+               dbHighscore = object.get("highscore");
+               
+               if(dbHighscore >= currentScore) {
+                  updateHighscore("old", dbHighscore)
+               }
+               else {
+                  deleteHighscore(user, category);
+                  saveHighscore(user, category, currentScore);
+                  updateHighscore("new", currentScore);
+               }
+            }
+         },
+         error: function(object) {
+            return false;
          }
-      },
-      error: function(object) {
-         return false;
-      }
-   });
+      });
+   }
 }
 
 
