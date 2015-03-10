@@ -82,7 +82,6 @@ function deleteHighscore(user, category) {
 
    query.first({
       success: function(object) {
-         alert("object destroyed");
          object.destroy({});
       },
       error: function(object) {
