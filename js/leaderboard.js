@@ -1,20 +1,19 @@
-var user;
-
-function setUser(name) {
-   alert("name = " + name);
-   user = name;
-   alert("user = " + user);
-}
+var username;
 
 function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
    getTopScores("corporation");
    
-   alert("user now = " + user);
+   try {
+      username = document.URL.substring(document.URL.indexOf("?user=") + 6);
+   }
+   catch(err) {
+      //user did not click on leaderboard link
+   }
    
-   if(user !== undefined)
-      alert(user);
+   if(username !== undefined)
+      alert(username);
    else
       alert("weak");
 }
