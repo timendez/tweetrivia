@@ -1,6 +1,7 @@
 var user;
 
 function setUser(name) {
+   alert("here!");
    user = name;
 }
 
