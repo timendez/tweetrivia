@@ -11,10 +11,21 @@ table {
    padding-right: .5%;
    float: left;
    
-   /* Outline */
+   /* Black Outline */
    text-shadow:
    -1px -1px 0 #000,
    1px -1px 0 #000,
    -1px 1px 0 #000,
    1px 1px 0 #000;
+}
+
+#highlightUser {
+   color:black;
+   
+   /* White Outline */
+   text-shadow:
+   -1px -1px 0 #fff,
+   1px -1px 0 #fff,
+   -1px 1px 0 #fff,
+   1px 1px 0 #fff;
 }

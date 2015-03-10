@@ -2,6 +2,11 @@ function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
    getTopScores("corporation");
+   
+   if(username !== undefined)
+      alert(username);
+   else
+      alert("weak");
 }
 
 function receiveTopScores(results, category) {
