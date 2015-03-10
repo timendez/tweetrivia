@@ -1,14 +1,17 @@
 var user;
 
 function setUser(name) {
-   alert("here!");
+   alert("name = " + name);
    user = name;
+   alert("user = " + user);
 }
 
 function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
    getTopScores("corporation");
+   
+   alert("user now = " + user);
    
    if(user !== undefined)
       alert(user);
