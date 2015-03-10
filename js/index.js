@@ -125,6 +125,8 @@ function checkTime(){
       $("#popup").removeClass("hide");
       clearInterval(timeI);
       clearInterval(checkI);
+      
+      checkHighscore(username, selectedCategory, score);
    }
 }
 function start(){
@@ -183,7 +185,9 @@ function answer(str) {
 }
 
 function updateHighscore(status, score) {
-   alert("heyo " + status + " " + score);
+   if(status === "new") {
+      alert("New high score for " + username + "!");
+   }
 }
 
 

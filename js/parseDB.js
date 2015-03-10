@@ -54,8 +54,14 @@ function checkHighscore(user, category, currentScore) {
          }
          else {
             dbHighscore = object.get("highscore");
-            saveHighscore(user, category, dbHighscore);
-            dbHighscore >= currentScore ? updateHighscore("old", dbHighscore) : updateHighscore("new", currentScore);
+            
+            if(dbHighscore >= currentScore) {
+               updateHighscore("old", dbHighscore)
+            }
+            else {
+               saveHighscore(user, category, dbHighscore);
+               updateHighscore("new", currentScore);
+            }
          }
       },
       error: function(object) {
@@ -90,15 +96,13 @@ function saveHighscore(user, category, highscore) {
    var HighscoreObject = Parse.Object.extend("Highscore");
    var highscoreObject = new HighscoreObject();
 
-   alert("in save");
+
    highscoreObject.save({"user": user, "category": category, "highscore": parseInt(highscore)}, {
       success: function(object) {
-      alert("successful save");
          return true; //saved correctly to DB
       },
       error: function(error) {
-      alert("error");
-      alert("error code: " + JSON.parse(error));
+         alert("Error: Could not save to database");
          return false; //didn't save correctly to DB
       }
    });
