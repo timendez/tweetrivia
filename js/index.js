@@ -113,7 +113,7 @@ function loadNewQuestion() {
 	}
 	clearInterval(timeI);
 	clearInterval(checkI);
-        timerI = checkI = false;
+        timeI = checkI = false;
 	
 	// get category user selected
 	selectedCategory = $("#categorySelect option:selected").val();
@@ -181,7 +181,7 @@ function checkTime(){
 	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
-      timerI = checkI = false;
+      timeI = checkI = false;
       checkHighscore(username, selectedCategory, score);
    }
 }
@@ -200,7 +200,7 @@ function start(){
 function change(){
    clearInterval(timeI);
    clearInterval(checkI);
-   timerI = checkI = false;
+   timeI = checkI = false;
    $("#timer").attr("value", timePerQuestion);
 }
 function restart(){
@@ -212,7 +212,7 @@ function restart(){
    $("#scoreVal").html("0");
    clearInterval(timeI);
    clearInterval(checkI);
-   timerI = checkI = false;
+   timeI = checkI = false;
    loadNewQuestion();
 }
 
@@ -232,7 +232,7 @@ function answer(str) {
 	  displayCorrect();
       clearInterval(timeI);
       clearInterval(checkI);
-      timerI = checkI = false;
+      timeI = checkI = false;
       loadNewQuestion();
    }
    else {
@@ -241,7 +241,7 @@ function answer(str) {
 	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
-      timerI = checkI = false;
+      timeI = checkI = false;
       checkHighscore(username, selectedCategory, score);
    }
 }
