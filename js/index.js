@@ -79,10 +79,10 @@ function receiveChoices(receivedChoices) {
 		function (reply, rate_limit_status) {
 			if(reply !== undefined) {
 				// display usernames
-				$("#choice1").html(choices[0] + "\n" + reply[0].name);
-				$("#choice2").html(choices[1] + "\n" + reply[1].name);
-				$("#choice3").html(choices[2] + "\n" + reply[2].name);
-				$("#choice4").html(choices[3] + "\n" + reply[3].name);
+				$("#choice1").html(reply[0].name + "<br>" + choices[0]);
+				$("#choice2").html(reply[1].name + "<br>" + choices[1]);
+				$("#choice3").html(reply[2].name + "<br>" + choices[2]);
+				$("#choice4").html(reply[3].name + "<br>" + choices[3]);
 			
 				// display profile pic
 				$("#choice1").prepend("<img src='" + reply[0].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
