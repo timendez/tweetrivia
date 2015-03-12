@@ -15,6 +15,8 @@ $(document).ready(function() {
 	cb.setBearerToken(bearerToken);
 	parseInit();
 	
+	$(document).bind('keydown', 'alt+ctrl+n', restart);
+	
 	$("#leaderboardButton").mousedown(function() {
 		$("#leaderboardButton").removeClass("blackBorder");
 		$("#leaderboardButton").addClass("whiteBorder");
