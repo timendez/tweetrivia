@@ -192,9 +192,9 @@ function start(){
    $("#timeLeftLabel").html("Time Remaining: " + timePerQuestion + " seconds");
    $("#answerStatusText").html("&nbsp");
    gameInProgress = true;
-   if(timeI == false)
+   if(timeI == false || timeI == undefined)
    	timeI = window.setInterval(getTime, 1000);
-   if(checkI == false)
+   if(checkI == false || checkI == undefined)
    	checkI = window.setInterval(checkTime, 1000);
 }
 function change(){
