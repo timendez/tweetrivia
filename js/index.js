@@ -113,6 +113,7 @@ function loadNewQuestion() {
 	}
 	clearInterval(timeI);
 	clearInterval(checkI);
+        timerI = checkI = false;
 	
 	// get category user selected
 	selectedCategory = $("#categorySelect option:selected").val();
@@ -180,6 +181,7 @@ function checkTime(){
 	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
+      timerI = checkI = false;
       checkHighscore(username, selectedCategory, score);
    }
 }
@@ -190,12 +192,15 @@ function start(){
    $("#timeLeftLabel").html("Time Remaining: " + timePerQuestion + " seconds");
    $("#answerStatusText").html("&nbsp");
    gameInProgress = true;
-   timeI = window.setInterval(getTime, 1000);
-   checkI = window.setInterval(checkTime, 1000);
+   if(timeI == false)
+   	timeI = window.setInterval(getTime, 1000);
+   if(checkI == false)
+   	checkI = window.setInterval(checkTime, 1000);
 }
 function change(){
    clearInterval(timeI);
    clearInterval(checkI);
+   timerI = checkI = false;
    $("#timer").attr("value", timePerQuestion);
 }
 function restart(){
@@ -207,6 +212,7 @@ function restart(){
    $("#scoreVal").html("0");
    clearInterval(timeI);
    clearInterval(checkI);
+   timerI = checkI = false;
    loadNewQuestion();
 }
 
@@ -226,6 +232,7 @@ function answer(str) {
 	  displayCorrect();
       clearInterval(timeI);
       clearInterval(checkI);
+      timerI = checkI = false;
       loadNewQuestion();
    }
    else {
@@ -234,6 +241,7 @@ function answer(str) {
 	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
+      timerI = checkI = false;
       checkHighscore(username, selectedCategory, score);
    }
 }
