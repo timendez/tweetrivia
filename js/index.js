@@ -18,49 +18,47 @@ $(document).ready(function() {
 	$("#leaderboardButton").mousedown(function() {
 		$("#leaderboardButton").removeClass("blackBorder");
 		$("#leaderboardButton").addClass("whiteBorder");
-	}).mouseup(function() {
-		$("#leaderboardButton").removeClass("whiteBorder");
-		$("#leaderboardButton").addClass("blackBorder");
 	});
 	
 	$("#startButton").mousedown(function() {
 		$("#startButton").removeClass("blackBorder");
 		$("#startButton").addClass("whiteBorder");
-	}).mouseup(function() {
-		$("#startButton").removeClass("whiteBorder");
-		$("#startButton").addClass("blackBorder");
 	});
 	
 	$("#choice1").mousedown(function() {
 		$("#choice1").removeClass("blackBorder");
 		$("#choice1").addClass("whiteBorder");
-	}).mouseup(function() {
-		$("#choice1").removeClass("whiteBorder");
-		$("#choice1").addClass("blackBorder");
 	});
 	
 	$("#choice2").mousedown(function() {
 		$("#choice2").removeClass("blackBorder");
 		$("#choice2").addClass("whiteBorder");
-	}).mouseup(function() {
-		$("#choice2").removeClass("whiteBorder");
-		$("#choice2").addClass("blackBorder");
 	});
 	
 	$("#choice3").mousedown(function() {
 		$("#choice3").removeClass("blackBorder");
 		$("#choice3").addClass("whiteBorder");
-	}).mouseup(function() {
-		$("#choice3").removeClass("whiteBorder");
-		$("#choice3").addClass("blackBorder");
 	});
 	
 	$("#choice4").mousedown(function() {
 		$("#choice4").removeClass("blackBorder");
 		$("#choice4").addClass("whiteBorder");
-	}).mouseup(function() {
+	});
+	
+	$("body").mouseup(function() {
+		$("#leaderboardButton").removeClass("whiteBorder");
+		$("#startButton").removeClass("whiteBorder");
+		$("#choice1").removeClass("whiteBorder");
+		$("#choice2").removeClass("whiteBorder");
+		$("#choice3").removeClass("whiteBorder");
 		$("#choice4").removeClass("whiteBorder");
+		$("#leaderboardButton").addClass("blackBorder");
+		$("#startButton").addClass("blackBorder");
+		$("#choice1").addClass("blackBorder");
+		$("#choice2").addClass("blackBorder");
+		$("#choice3").addClass("blackBorder");
 		$("#choice4").addClass("blackBorder");
+
 	});
 	
 	// Only needed to do this once to obtain the bearer token. Now it's hard coded. 

@@ -119,7 +119,7 @@ button:focus {
 
 #highScoreDiv {
 	display:block; 
-	width:160px; 
+	width:165px; 
 	height: 30px;
 	margin: 0px auto 0px auto;
 	padding-top: 18px;
@@ -139,7 +139,7 @@ button:focus {
 
 .roundedWhiteButton {
 	font-family: "Comic Sans MS", cursive, sans-serif;
-	font-size: 25px;
+	font-size: 15px;
 	color: #000000;
 	padding: 10px 20px;
 	background: -moz-linear-gradient(
