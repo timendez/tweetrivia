@@ -88,18 +88,16 @@ function receiveTweet(tweet) {
 
 function getTweet(user) {
 	cb.__call(
-		"search_tweets",
-		"q=from%3A" + user + "&count=25",
+		"statuses_userTimeline",
+		"screen_name=" + user + "&count=100&exclude_replies=true&include_rts=false&trim_user=true",
 		function (reply, rate_limit_status) {
 			console.log(rate_limit_status);
-			if(reply.statuses !== undefined) {
-				if(reply.statuses.length == 0) {
-					loadNewQuestion();
-				}
-				receiveTweet(reply.statuses[getRandomInt(0,reply.statuses.length)].text);
+			if(reply.length > 0) {
+				receiveTweet(reply[getRandomInt(0,reply.length)].text);
 			}
 			else {
-				alert("Twitter API is not responding!");
+				console.log("Failed to retrieve any tweets. Trying again.");
+				loadNewQuestion();
 			}
 		},
 		true
