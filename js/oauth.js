@@ -7,7 +7,7 @@ function loginTwitter() {
             var cb = new Codebird;
             cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
 
-            $("#login").click(function(){
+
                 cb.__call(
                 "oauth_requestToken",
                 function (reply) {
@@ -27,7 +27,7 @@ function loginTwitter() {
             
                 }
                 );
-            });
+
         }
 
 function callback(){

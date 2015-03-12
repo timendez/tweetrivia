@@ -12,52 +12,67 @@
    <script src="js/index.js" type="text/javascript"></script>
    <script src="js/oauth.js" type="text/javascript"></script>
 </head>
-<body onload="parseInit();">
-    <p align = "right">
-        <img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="loginTwitter()">
-        <script type="text/javascript">
-      init(
-        {callback_function: callback}
-         );
-        </script>
-       <div id = "username" align = "right">Welcome to Tweetrivia!! </div>
-    </p>
-    <div id="title">
+<body onload="parseInit();" style="blue">
+	<div id="headerMenu" class="comicFont">
+		<div style="float:right" id="loginDiv">
+			<div id = "username">Welcome to Tweetrivia!! </div>
+			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="loginTwitter()">
+			<script type="text/javascript">
+			  init(
+				{callback_function: callback}
+				 );
+			</script>
+		</div>
+		<div style="float:left" id="categoryDiv">
+			<label for="categorySelect" id="categorySelectLabel">Select a category</label>
+			<br>
+			<select id="categorySelect" class="comicFont roundedCorner">
+				<option value="actor">Actor</option>
+				<option value="music">Music</option>
+				<option value="corporation">Corporation</option>
+			</select>
+			<button id="startButton" class="roundedOrangeButton" onclick="restart();">Start New Game</button>
+		</div>
+		<div id="highScoreDiv">
+			<button id="leaderboardButton" class="roundedBlueButton" onclick="openLeaderboard();">
+				View High Scores
+			</button>
+		</div>
+	</div>
+    <div id="title" class="black whiteText boldText">
         <p>Tweetrivia</p>
     </div>
-    
-    <a id="leaderboardLink" href="leaderboard.html">
-      High Scores
-    </a>
-    
     <div>
-        <br />
-           <div id="scoreDiv">
-               <p id="score"> Score: </p>
-               <p id= "scoreVal"> 0</p>
-           </div>
+		<div id="answerStatusText" class="comicFont">
+			&nbsp
+		</div>
+		<div id="scoreDiv" class="comicFont">
+			<p id="score"> Score: </p>
+			<p id= "scoreVal"> 0</p>
+		</div>
         <br/>
         <br />
-			<div id="timeLeftDiv">
+			<div id="timeLeftDiv" class="comicFont">
 				<div id="timeLeftLabel">Time Remaining: </div>
 				<meter id="timer"></meter>
 			</div>
         <br />
-        <div id="tweet">
+        <div id="tweet" class="comicFont offWhite">
             <p id="tweetText">Tweet goes here</p>
         </div>
         <br />
         <div id="mc">
-            <button id="choice1" class="choiceButton" onclick="answer(this.id)">Choice A</button>
-            <button id="choice2" class="choiceButton" onclick="answer(this.id)">Choice B</button>
+            <button id="choice1" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice A</button>
+            <button id="choice2" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice B</button>
             <br />
             <br />
-            <button id="choice3" class="choiceButton" onclick="answer(this.id)">Choice C</button>
-            <button id="choice4" class="choiceButton" onclick="answer(this.id)">Choice D</button>
+            <br />
+            <button id="choice3" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice C</button>
+            <button id="choice4" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice D</button>
         </div>
     </div>
 
-    <div id="mask"> </div>
+    <!--div id="mask"> </div>
     <div id="popup2" >
         <h2>Pick A Category..</h2>
         <div class="flexable">
@@ -78,7 +93,7 @@
             <input type="button" value="Restart" onclick="restart()" class="button"/>
             <input type="button" value="Change Category" class="button" onclick="change()"/>
         </div>
-    </div>
+    </div-->
 
 </body>
 </html>

@@ -6,15 +6,67 @@ var choices;
 var userIDg = null;
 var username;
 var selectedCategory;
+var correctResponses = ["Correct!", "Nice!", "You got it!", "Right on!", "Yeah baby!"];
+var correct = null;
+var gameInProgress = false;
 
 $(document).ready(function() {
 	cb = new Codebird();
 	cb.setBearerToken(bearerToken);
 	parseInit();
+	
+	$("#leaderboardButton").mousedown(function() {
+		$("#leaderboardButton").removeClass("blackBorder");
+		$("#leaderboardButton").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#leaderboardButton").removeClass("whiteBorder");
+		$("#leaderboardButton").addClass("blackBorder");
+	});
+	
+	$("#startButton").mousedown(function() {
+		$("#startButton").removeClass("blackBorder");
+		$("#startButton").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#startButton").removeClass("whiteBorder");
+		$("#startButton").addClass("blackBorder");
+	});
+	
+	$("#choice1").mousedown(function() {
+		$("#choice1").removeClass("blackBorder");
+		$("#choice1").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#choice1").removeClass("whiteBorder");
+		$("#choice1").addClass("blackBorder");
+	});
+	
+	$("#choice2").mousedown(function() {
+		$("#choice2").removeClass("blackBorder");
+		$("#choice2").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#choice2").removeClass("whiteBorder");
+		$("#choice2").addClass("blackBorder");
+	});
+	
+	$("#choice3").mousedown(function() {
+		$("#choice3").removeClass("blackBorder");
+		$("#choice3").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#choice3").removeClass("whiteBorder");
+		$("#choice3").addClass("blackBorder");
+	});
+	
+	$("#choice4").mousedown(function() {
+		$("#choice4").removeClass("blackBorder");
+		$("#choice4").addClass("whiteBorder");
+	}).mouseup(function() {
+		$("#choice4").removeClass("whiteBorder");
+		$("#choice4").addClass("blackBorder");
+	});
+	
+	// Only needed to do this once to obtain the bearer token. Now it's hard coded. 
     //applicationOnlyAuth();
 });
 
-var correct = null;
 function receiveChoices(receivedChoices) {
 	choices = receivedChoices;
 	
@@ -55,8 +107,11 @@ function receiveChoices(receivedChoices) {
 }
 
 function loadNewQuestion() {
+	clearInterval(timeI);
+	clearInterval(checkI);
+	
 	// get category user selected
-	selectedCategory = $("#category option:selected").val();
+	selectedCategory = $("#categorySelect option:selected").val();
 
 	// get 4 Twitter account names from the selected category
 	getChoices(selectedCategory);
@@ -117,45 +172,48 @@ function getTime() {
 function checkTime(){
    var x = $("#timer").attr("value");
    if (x <= 0) {
-      document.getElementById("text").innerHTML = "Time's Up!"
-      document.getElementById("finalScore").innerHTML = ""
-      $("#mask").removeClass("hide");
-      $("#popup").removeClass("hide");
+	  displayTimeUp();
+	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
-      
-      if(username === undefined)
-         alert("Please login with Twitter");
-      else
-         checkHighscore(username, selectedCategory, score);
+      checkHighscore(username, selectedCategory, score);
    }
 }
 function start(){
-   $("#mask").addClass("hide");
-   $("#popup2").addClass("hide");
+	if(username === undefined) {
+		alert("Please login to Twitter before playing. Thanks!");
+		return;
+	}
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
    $("#timer").attr("value", timePerQuestion);
    $("#timeLeftLabel").html("Time Remaining: " + timePerQuestion + " seconds");
+   $("#answerStatusText").html("&nbsp");
+   gameInProgress = true;
    timeI = window.setInterval(getTime, 1000);
    checkI = window.setInterval(checkTime, 1000);
 }
 function change(){
-   $("#popup").addClass("hide");
-   $("#popup2").removeClass("hide");
    clearInterval(timeI);
    clearInterval(checkI);
    $("#timer").attr("value", timePerQuestion);
 }
 function restart(){
-   $("#mask").addClass("hide");
-   $("#popup").addClass("hide");
-   $("#popup2").addClass("hide");
+   $("#timer").attr("min", 0);
+   $("#timer").attr("max", timePerQuestion);
    $("#timer").attr("value", timePerQuestion);
+   $("#timeLeftLabel").html("Time Remaining: " + timePerQuestion + " seconds");
+   $("#answerStatusText").html("&nbsp");
+   $("#scoreVal").html("0");
+   clearInterval(timeI);
+   clearInterval(checkI);
    loadNewQuestion();
 }
 
 function answer(str) {
+	if(gameInProgress == false) {
+		return;
+	}
    value = document.getElementById(str).innerHTML;
    res = value.split(">");
    ans = res[res.length - 1];
@@ -165,26 +223,18 @@ function answer(str) {
       score = document.getElementById("scoreVal").innerHTML;
       score++;
       document.getElementById("scoreVal").innerHTML = score;
-      $("#timer").attr("value", timePerQuestion);
+	  displayCorrect();
       clearInterval(timeI);
       clearInterval(checkI);
       loadNewQuestion();
    }
    else {
       score = document.getElementById("scoreVal").innerHTML;
-      document.getElementById("text").innerHTML = "Wrong Answer!"
-      document.getElementById("finalScore").innerHTML = "Score: " + score;
-      $("#timer").attr("value", timePerQuestion);
-      document.getElementById("scoreVal").innerHTML = 0;
+      displayWrong();
+	  gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
-      $("#mask").removeClass("hide");
-      $("#popup").removeClass("hide");
-
-      if(username === undefined)
-         alert("Please login with Twitter");
-      else
-         checkHighscore(username, selectedCategory, score);
+      checkHighscore(username, selectedCategory, score);
    }
 }
 
@@ -194,90 +244,27 @@ function updateHighscore(status, score) {
    }
 }
 
-
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      userIDg = response.id;
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
-function checkLoginState() {
- FB.getLoginStatus(function(response) {
-   statusChangeCallback(response);
- });
+function openLeaderboard() {
+	window.location.href = "leaderboard.html";
 }
 
-window.fbAsyncInit = function() {
-FB.init({
- appId      : '895378573826197',
- cookie     : true,  // enable cookies to allow the server to access 
-                     // the session
- xfbml      : true,  // parse social plugins on this page
- version    : 'v2.1' // use version 2.1
-});
-
-// Now that we've initialized the JavaScript SDK, we call 
-// FB.getLoginStatus().  This function gets the state of the
-// person visiting this page and can return one of three states to
-// the callback you provide.  They can be:
-//
-// 1. Logged into your app ('connected')
-// 2. Logged into Facebook, but not your app ('not_authorized')
-// 3. Not logged into Facebook and can't tell if they are logged into
-//    your app or not.
-//
-// These three cases are handled in the callback function.
-
-FB.getLoginStatus(function(response) {
- statusChangeCallback(response);
-});
-
-};
-
-// Load the SDK asynchronously
-(function(d, s, id) {
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) return;
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/en_US/sdk.js";
- fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function Logout(){
- FB.logout(function () { document.location.reload(); });
+function displayCorrect() {
+	var statusText = $("#answerStatusText");
+	statusText.removeClass("red");
+	statusText.addClass("green");
+	statusText.html(correctResponses[getRandomInt(0,correctResponses.length)]);
 }
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
+function displayWrong() {
+	var statusText = $("#answerStatusText");
+	statusText.removeClass("green");
+	statusText.addClass("red");
+	statusText.html("Game over. The correct answer was: " + correct);
+}
 
- console.log('Welcome!  Fetching your information.... ');
- FB.api('/me', function(response) {
-   console.log('Successful login for: ' + response.name);
-   str = 'Hi ' + response.name + '!'; 
-   str += "<input type='button' value='Logout' onclick='Logout();'/>";
-   document.getElementById('status').innerHTML = str;
-   document.getElementById("profile").src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
-  userIDg = response.id;
- });
+function displayTimeUp() {
+	var statusText = $("#answerStatusText");
+	statusText.removeClass("green");
+	statusText.addClass("red");
+	statusText.html("Time's up! The correct answer was: " + correct);
 }

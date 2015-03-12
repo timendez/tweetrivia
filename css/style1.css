@@ -1,5 +1,12 @@
 ﻿body {
-   background-color: #00CCFF;
+   background-color: #55ACEE;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
 #title {
@@ -7,8 +14,8 @@
    font-style:bold;
    font-size:30px;  
    font-family: "Comic Sans MS", cursive, sans-serif;
-   letter-spacing: 2px;
-   background-color: white;
+   letter-spacing: 4px;
+   margin-bottom: -20px;
 }
 
 #tweet {
@@ -17,10 +24,8 @@
    min-height:150px;
    min-width:400px;
    text-align:center;
-   font-family: "Comic Sans MS", cursive, sans-serif;
    margin-left: auto;
    margin-right: auto;
-   background-color: white;
 }
 
 /* Makes the text unselectable */
@@ -33,22 +38,17 @@
    user-select: none;
 }
 
-#status {
-   font-family: "Comic Sans MS", cursive, sans-serif;
-}
-
 #mc {
    text-align:center;
 }
 
 .choiceButton {
    max-width:300px;
-   max-height:50px;
-   min-height:50px;
+   max-height:70px;
+   min-height:70px;
    min-width:300px;
    padding: 0px;
-   font-family: "Comic Sans MS", cursive, sans-serif;
-   font-size: 1.5em;
+   margin: 0px 10px 0px 10px;
 }
 
 #timer {
@@ -72,25 +72,21 @@
    padding: 0px;
    width: 400px;
    height: 30px;
-   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #score {
    float: left;
-   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #scoreVal {
    float:right;
    margin-right: 300px;
-   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #timeLeftLabel {
    display: block;
    margin-left: auto;
    margin-right: auto;
-   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .profilepic {
@@ -100,6 +96,193 @@
 	width: 50px;
 }
 
-#leaderboardLink {
-   text-align: center;
+.comicFont {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+#headerMenu {
+	height: 30px;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#categorySelect {
+	width: 140px;
+}
+
+#categoryDiv {
+	margin-top: -5px;
+}
+
+#highScoreDiv {
+	display:block; 
+	width:160px; 
+	height: 30px;
+	margin: 0px auto 0px auto;
+	padding-top: 18px;
+}
+
+#loginDiv {
+	margin-top: -4px;
+}
+
+#startButton {
+	
+}
+
+.roundedCorner {
+	border-radius: 4px;
+}
+
+.roundedWhiteButton {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 25px;
+	color: #000000;
+	padding: 10px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#999999);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		to(#999999));
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #000000;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.roundedOrangeButton {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 5px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#fab60a 0%,
+		#6e5302);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#fab60a),
+		to(#6e5302));
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	border: 1px solid #000000;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.roundedBlueButton {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	padding: 5px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#09a1f2 0%,
+		#06396e);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#09a1f2),
+		to(#06396e));
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	border: 1px solid #000000;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,0.7);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.4),
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.blackBorder {
+	border-color: black;
+}
+
+.whiteBorder {
+	border-color: white;
+}
+
+.blue {
+	background-color: #55ACEE;
+}
+
+.black {
+	background-color: #000000;
+}
+
+.grey1 {
+	background-color: #66757F;
+}
+
+.grey2 {
+	background-color: #8899A6;
+}
+
+.grey3 {
+	background-color: #CCD6DD;
+}
+
+.grey4 {
+	background-color: #E1E8ED;
+}
+
+.offWhite {
+	background-color: #F5F8FA;
+}
+
+.whiteText {
+	color: #FFFFFF;
+}
+
+.green {
+	color: #006600;
+}
+
+.red {
+	color: #E60000;
+}
+
+.boldText {
+	font-weight: bold;
+}
+
+#answerStatusText {
+	font-size: 2em;
+	text-align: center;
 }
