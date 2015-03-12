@@ -107,6 +107,10 @@ function receiveChoices(receivedChoices) {
 }
 
 function loadNewQuestion() {
+	if(username === undefined) {
+		alert("Please login to Twitter before playing. Thanks!");
+		return;
+	}
 	clearInterval(timeI);
 	clearInterval(checkI);
 	
@@ -180,10 +184,6 @@ function checkTime(){
    }
 }
 function start(){
-	if(username === undefined) {
-		alert("Please login to Twitter before playing. Thanks!");
-		return;
-	}
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
    $("#timer").attr("value", timePerQuestion);
