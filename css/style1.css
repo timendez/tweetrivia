@@ -2,6 +2,11 @@
    background-color: #55ACEE;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -19,13 +24,14 @@ button:focus {
 }
 
 #tweet {
-   max-width: 400px;
-   max-height:150px;
-   min-height:150px;
-   min-width:400px;
+	overflow: hidden;
+	position: relative;
+	width: 400px;
+	height: 150px;
    text-align:center;
    margin-left: auto;
    margin-right: auto;
+   margin-top: 10px;
 }
 
 /* Makes the text unselectable */
@@ -43,12 +49,10 @@ button:focus {
 }
 
 .choiceButton {
-   max-width:300px;
-   max-height:70px;
-   min-height:70px;
-   min-width:300px;
-   padding: 0px;
-   margin: 0px 10px 0px 10px;
+	width: 300px;
+	height: 70px;
+	position: relative;
+	margin: 0px 10px 0px 10px;
 }
 
 #timer {
@@ -57,6 +61,7 @@ button:focus {
 }
 
 #timeLeftDiv {
+	position: relative;
    display: block;
    margin-left: auto;
    margin-right: auto;
@@ -66,6 +71,7 @@ button:focus {
 }
 
 #scoreDiv {
+	position: relative;
    display: block;
    margin-left: auto;
    margin-right: auto;
@@ -127,10 +133,6 @@ button:focus {
 
 #loginDiv {
 	margin-top: -4px;
-}
-
-#startButton {
-	
 }
 
 .roundedCorner {

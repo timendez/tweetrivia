@@ -106,11 +106,75 @@ function receiveChoices(receivedChoices) {
 	// function called by the callback in getTweet
 }
 
+function animateHide() {
+	$("#choice1").animate({
+		right: '1000px',
+	}, 500, "swing", function() {
+
+	});
+	
+	$("#choice2").animate({
+		left: '1000px',
+	}, 500, "swing", function() {
+
+	});
+	
+	$("#choice3").animate({
+		right: '1000px',
+	}, 500, "swing", function() {
+
+	});
+	
+	$("#choice4").animate({
+		left: '1000px',
+	}, 500, "swing", function() {
+
+	});
+	
+	$("#tweetText").html("");
+	$("#tweet").animate({
+		width: "0px"
+	}, 500, "swing");
+}
+
+function animateShow(tweetText) {
+	$("#choice1").animate({
+		right: '0px',
+	}, 500, "swing", function() {
+
+	});
+	
+	$("#choice2").animate({
+		left: '0px',
+	}, 500, "swing", function() {
+		
+	});
+	
+	$("#choice3").animate({
+		right: '0px',
+	}, 500, "swing", function() {
+		
+	});
+	
+	$("#choice4").animate({
+		left: '0px',
+	}, 500, "swing", function() {
+		
+	});
+	
+	$("#tweet").animate({
+		width: "400px"
+	}, 500, "swing", function() {
+		$("#tweetText").html(tweetText);
+	});
+}
+
 function loadNewQuestion() {
 	if(username === undefined) {
 		alert("Please login to Twitter before playing. Thanks!");
 		return;
 	}
+	animateHide();
 	clearInterval(timeI);
 	clearInterval(checkI);
         timeI = checkI = false;
@@ -142,7 +206,7 @@ function applicationOnlyAuth() {
 }
 
 function receiveTweet(tweet) {
-	$("#tweetText").html(tweet);
+	animateShow(tweet);
 	start();
 }
 
