@@ -239,7 +239,6 @@ function receiveTweet(tweet, user) {
 }
 
 function sanitizeTweet(tweet, user) {
-alert("sanitizing for user " + user);
    tweet.replace(user, "{user}");
 }
 
