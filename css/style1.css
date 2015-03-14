@@ -1,5 +1,9 @@
-﻿body {
-   background-color: #55ACEE;
+﻿html { 
+  background: url("../img/cloudBackground.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 html, body {
@@ -21,6 +25,7 @@ button:focus {
    font-family: "Comic Sans MS", cursive, sans-serif;
    letter-spacing: 4px;
    margin-bottom: -20px;
+   background-image: url("../img/seamlessBlackMesh.jpg");
 }
 
 #tweet {
