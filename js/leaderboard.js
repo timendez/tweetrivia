@@ -4,6 +4,9 @@ function populateLeaderboards() {
    getTopScores("music");
    getTopScores("actor");
    getTopScores("corporation");
+   getTopScores("NFL");
+   getTopScores("nba");
+   getTopScores("soccer");
    
    var indexOfUser = document.URL.indexOf("?user=");
    var urlIndexPadding = 6;
