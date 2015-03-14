@@ -244,6 +244,7 @@ function getTweet(user) {
 			console.log(rate_limit_status);
 			if(reply.length > 0) {
 				var randomNumber = getRandomInt(0, reply.length);
+				console.log("length of reply=" + reply.length);
 				console.log("randomNumber=" + randomNumber);
 				receiveTweet(reply[randomNumber].text);
 			}
