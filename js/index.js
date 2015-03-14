@@ -239,7 +239,7 @@ function receiveTweet(tweet, user) {
 }
 
 function sanitizeTweet(tweet, user) {
-   tweet.replace(user, "{user}");
+   return tweet.replace(user, "{user}");
 }
 
 function getTweet(user) {
