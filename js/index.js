@@ -286,6 +286,7 @@ function checkTime(){
    }
 }
 function start(){
+   $("#newHighscore").addClass("hide");
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
    $("#timer").attr("value", timePerQuestion);
@@ -304,6 +305,7 @@ function change(){
    $("#timer").attr("value", timePerQuestion);
 }
 function restart(){
+   $("#newHighscore").addClass("hide");
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
    $("#timer").attr("value", timePerQuestion);
@@ -348,7 +350,7 @@ function answer(str) {
 
 function updateHighscore(status, score) {
    if(status === "new" && score > 0) {
-      alert("New high score for " + username + "! " + score);
+      $("#newHighscore").removeClass("hide");
    }
 }
 
