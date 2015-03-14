@@ -196,10 +196,6 @@ function animateShow(tweetText) {
 }
 
 function loadNewQuestion() {
-	if(username === undefined) {
-		alert("Please login to Twitter before playing. Thanks!");
-		return;
-	}
 	animateHide();
 	clearInterval(timeI);
 	clearInterval(checkI);
@@ -282,7 +278,9 @@ function checkTime(){
       clearInterval(timeI);
       clearInterval(checkI);
       timeI = checkI = false;
-      checkHighscore(username, selectedCategory, score);
+      
+      if(username !== undefined)
+         checkHighscore(username, selectedCategory, score);
    }
 }
 function start(){
@@ -344,7 +342,9 @@ function answer(str) {
       clearInterval(timeI);
       clearInterval(checkI);
       timeI = checkI = false;
-      checkHighscore(username, selectedCategory, score);
+      
+      if(username !== undefined)
+         checkHighscore(username, selectedCategory, score);
    }
 }
 
