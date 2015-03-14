@@ -9,11 +9,14 @@ var selectedCategory;
 var correctResponses = ["Correct!", "Nice!", "You got it!", "Right on!", "Yeah baby!"];
 var correct = null;
 var gameInProgress = false;
+var buttonSoundEffect;
 
 $(document).ready(function() {
 	cb = new Codebird();
 	cb.setBearerToken(bearerToken);
 	parseInit();
+	
+	buttonSoundEffect = new Audio("sound/buttonSound.mp3");
 	
 	$(document).bind('keydown', 'alt+ctrl+n', restart);
 	
@@ -47,6 +50,24 @@ $(document).ready(function() {
 		$("#choice4").addClass("whiteBorder");
 	});
 	
+	$("#login").mousedown(function() {
+		$("#login").animate({
+			width: "162px",
+			height: "32px",
+			bottom: "2px",
+			right: "2px"
+		}, 100, "linear", function() {
+			$("#login").animate({
+				width: "158px",
+				height: "28px",
+				bottom: "0px",
+				right: "0px"
+			}, 100, "linear", function() {
+				loginTwitter();
+			});
+		});
+	});
+	
 	$("body").mouseup(function() {
 		$("#leaderboardButton").removeClass("whiteBorder");
 		$("#startButton").removeClass("whiteBorder");
@@ -54,18 +75,23 @@ $(document).ready(function() {
 		$("#choice2").removeClass("whiteBorder");
 		$("#choice3").removeClass("whiteBorder");
 		$("#choice4").removeClass("whiteBorder");
+		$("#login").removeClass("whiteBorder");
 		$("#leaderboardButton").addClass("blackBorder");
 		$("#startButton").addClass("blackBorder");
 		$("#choice1").addClass("blackBorder");
 		$("#choice2").addClass("blackBorder");
 		$("#choice3").addClass("blackBorder");
 		$("#choice4").addClass("blackBorder");
-
+		$("#login").addClass("blackBorder");
 	});
 	
 	// Only needed to do this once to obtain the bearer token. Now it's hard coded. 
     //applicationOnlyAuth();
 });
+
+function playButtonSoundEffect() {
+	buttonSoundEffect.play();
+}
 
 function receiveChoices(receivedChoices) {
 	choices = receivedChoices;
@@ -317,7 +343,11 @@ function updateHighscore(status, score) {
 }
 
 function openLeaderboard() {
-	window.location.href = "leaderboard.html";
+	var timeoutID = setTimeout(function() {
+		window.location.href = "leaderboard.html";
+		clearTimeout(timeoutID);
+	}, 150);
+
 }
 
 function displayCorrect() {

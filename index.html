@@ -17,7 +17,7 @@
 	<div id="headerMenu" class="comicFont">
 		<div style="float:right" id="loginDiv">
 			<div id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
-			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="loginTwitter()">
+			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();" style="position:relative">
 			<script type="text/javascript">
 			  init(
 				{callback_function: callback}
@@ -33,10 +33,10 @@
 				<option value="corporation">Corporation</option>
 				<option value="NFL">NFL</option>
 			</select>
-			<button id="startButton" class="roundedOrangeButton" onclick="restart();">Start New Game</button>
+			<button id="startButton" class="roundedOrangeButton" onclick="playButtonSoundEffect(); restart();">Start New Game</button>
 		</div>
 		<div id="highScoreDiv">
-			<button id="leaderboardButton" class="roundedBlueButton" onclick="openLeaderboard();">
+			<button id="leaderboardButton" class="roundedBlueButton" onclick="playButtonSoundEffect(); openLeaderboard();">
 				View High Scores
 			</button>
 		</div>
@@ -64,13 +64,13 @@
         </div>
         <br />
         <div id="mc">
-            <button id="choice1" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice A</button>
-            <button id="choice2" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice B</button>
+            <button id="choice1" class="roundedWhiteButton choiceButton" onclick="playButtonSoundEffect(); answer(this.id)">Choice A</button>
+            <button id="choice2" class="roundedWhiteButton choiceButton" onclick="playButtonSoundEffect(); answer(this.id)">Choice B</button>
             <br />
             <br />
             <br />
-            <button id="choice3" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice C</button>
-            <button id="choice4" class="roundedWhiteButton choiceButton" onclick="answer(this.id)">Choice D</button>
+            <button id="choice3" class="roundedWhiteButton choiceButton" onclick="playButtonSoundEffect(); answer(this.id)">Choice C</button>
+            <button id="choice4" class="roundedWhiteButton choiceButton" onclick="playButtonSoundEffect(); answer(this.id)">Choice D</button>
         </div>
     </div>
 
