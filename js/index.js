@@ -231,9 +231,15 @@ function applicationOnlyAuth() {
 	);
 }
 
-function receiveTweet(tweet) {
-	animateShow(tweet);
+function receiveTweet(tweet, user) {
+   var safeTweet = sanitizeTweet(tweet);
+
+	animateShow(safeTweet);
 	start();
+}
+
+function sanitizeTweet(tweet, user) {
+   return tweet.replace(user, "{user}");
 }
 
 function getTweet(user) {
@@ -247,7 +253,7 @@ function getTweet(user) {
 				if(randomNumber === reply.length) {
 					randomNumber = randomNumber - 1;
 				}
-				receiveTweet(reply[randomNumber].text);
+				receiveTweet(reply[randomNumber].text, user);
 			}
 			else {
 				console.log("Failed to retrieve any tweets. Trying again.");
