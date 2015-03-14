@@ -293,3 +293,12 @@ button:focus {
 	font-size: 2em;
 	text-align: center;
 }
+
+.hide {
+   visibility: hidden;
+}
+
+#newHighscore {
+   float: right;
+   color: #FFFF00;
+}
