@@ -348,7 +348,7 @@ function updateHighscore(status, score) {
 
 function openLeaderboard() {
 	var timeoutID = setTimeout(function() {
-		window.location.href = "leaderboard.html";
+		window.location.href = "leaderboard.html?username=" + username;
 		clearTimeout(timeoutID);
 	}, 150);
 
