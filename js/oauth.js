@@ -1,5 +1,5 @@
 var callBack;
-
+var username;
 function init(json){
    callBack = json.callback_function;
 }
