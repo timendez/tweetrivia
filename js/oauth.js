@@ -46,6 +46,7 @@ function callback(){
             
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
             username = reply.screen_name;
+            alert(username);
             document.getElementById("login").style.visibility = "hidden";
             $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
@@ -54,9 +55,7 @@ function callback(){
     );
     cb.__call(
     "users_show",
-    {
-    "screen_name="+username
-    },
+    "screen_name="+username,
     function (reply) {
         alert(reply.profile_image_url+" "+reply.profile_image_url_https);
         document.getElementByID('profPic').src =  reply.profile_image_url;
