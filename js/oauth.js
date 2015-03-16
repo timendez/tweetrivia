@@ -55,7 +55,7 @@ function callback(){
     );
     cb.__call(
     "users_show",
-    username,
+    "screen_name="+username,
     function (reply) {
         alert(reply.profile_image_url+" "+reply.profile_image_url_https);
         document.getElementByID('profPic').src =  reply.profile_image_url;
