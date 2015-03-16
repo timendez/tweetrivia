@@ -17,12 +17,22 @@
 	<div id="headerMenu" class="comicFont">
 		<div style="float:right" id="loginDiv">
 			<div id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
+      <img src = "" id = "profPic">
 			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();" style="position:relative">
 			<script type="text/javascript">
+        if(localStorage["cb"] && localStorage["screenName"] && localStorage["profPicURL"] ) {
+          document.getElementById('username').innerHTML = "Yooo "+ localStorage["screenName"]+"!!!!";
+        document.getElementById("login").style.visibility = "hidden";
+        $("#leaderboardLink").attr("href", "leaderboard.html?user=" + localStorage["screenName"]);
+        document.getElementById('profPic').src = localStorage["profPicURL"];
+        }
+        else {
 			  init(
 				{callback_function: callback}
 				 );
+      }
 			</script>
+
 		</div>
 		<div style="float:left" id="categoryDiv">
 			<label for="categorySelect" id="categorySelectLabel" class="whiteText">Select a category</label>
