@@ -36,6 +36,16 @@ function callback(){
     cb.setToken(localStorage["token"], localStorage["tokenSecret"]);
 
     cb.__call(
+    "users_show",
+    "screen_name="+username,
+    function (reply) {
+        alert(reply.profile_image_url+" "+reply.profile_image_url_https);
+        document.getElementByID('profPic').src =  reply.profile_image_url;
+            alert(reply.profile_image_url);
+
+    }
+);
+    cb.__call(
         "oauth_accessToken",
         {
             oauth_verifier: localStorage["verifier"]
@@ -53,16 +63,6 @@ function callback(){
             // consider storing the token in a cookie or HTML5 local storage
         }
     );
-    cb.__call(
-    "users_show",
-    "screen_name="+username,
-    function (reply) {
-        alert(reply.profile_image_url+" "+reply.profile_image_url_https);
-        document.getElementByID('profPic').src =  reply.profile_image_url;
-            alert(reply.profile_image_url);
-
-    }
-);
 //-------------------------------
 
 }
