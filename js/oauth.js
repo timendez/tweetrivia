@@ -54,7 +54,7 @@ function callback(){
         }
     );
     cb.__call(
-    "users_lookup",
+    "users_show",
     username,
     function (reply) {
         alert(reply.profile_image_url+" "+reply.profile_image_url_https);
