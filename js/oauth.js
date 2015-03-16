@@ -46,8 +46,9 @@ function callback(){
 
             
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
+            username = reply.screen_name;
             username1 = reply.screen_name;
-            //alert(username1);
+            alert(username1);
             document.getElementById("login").style.visibility = "hidden";
             $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
