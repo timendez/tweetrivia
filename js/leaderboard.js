@@ -6,7 +6,7 @@ function populateLeaderboards() {
    getTopScores("corporation");
    getTopScores("NFL");
    getTopScores("nba");
-   getTopScores("soccer");
+   getTopScores("Soccer");
    
    var indexOfUser = document.URL.indexOf("?user=");
    var urlIndexPadding = 6;
