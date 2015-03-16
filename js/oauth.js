@@ -1,5 +1,5 @@
 var callBack;
-var username;
+var username1;
 function init(json){
    callBack = json.callback_function;
 }
@@ -46,7 +46,8 @@ function callback(){
 
             
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
-            username = reply.screen_name;
+            username1 = reply.screen_name;
+            alert(username1);
             document.getElementById("login").style.visibility = "hidden";
             $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
@@ -55,7 +56,9 @@ function callback(){
     );
     cb.__call(
     "users_show",
-    "screen_name="+username,
+    {
+    "screen_name="+username1
+    },
     function (reply) {
         alert(reply.profile_image_url+" "+reply.profile_image_url_https);
         document.getElementByID('profPic').src =  reply.profile_image_url;
