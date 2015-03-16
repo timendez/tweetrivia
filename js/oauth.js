@@ -5,8 +5,7 @@ function init(json){
 }
 function loginTwitter() {
             var cb = new Codebird;
-            cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
-
+            cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
 
                 cb.__call(
                 "oauth_requestToken",
@@ -32,7 +31,7 @@ function loginTwitter() {
 
 function callback(){
     var cb = new Codebird;
-    cb.setConsumerKey("2jCvFchz3pa5CrVxTITm3DbJ0", "3wZizuZjWjwpGnACuxwJbyQNdL8KUTW2zwY8g9rQDyApW9ahGE");
+    cb.setConsumerKey("RBZqUOzXdgrxl6BP8wVbO9KAD", "kQDqhrljYgmVPA1G55KMyhRpT5DOO68GLDPLUUkvhX47TRUPOt");
     // assign stored request token parameters to codebird here
     // ...
     cb.setToken(localStorage["token"], localStorage["tokenSecret"]);
