@@ -109,6 +109,9 @@ function receiveChoices(receivedChoices) {
 			if(reply !== undefined) {
 				// display usernames and profile pics on choice buttons
 				for(var i=0; i < reply.length; i++) {
+					console.log("choices[" + i + "]=" + choices[i]);
+					console.log("reply[" + i + "].name=" + reply[i].name);
+					console.log("reply[" + i + "].screen_name=" + reply[i].screen_name);
 					$("#choice" + (i+1)).html(reply[i].name + "<br>" + choices[i]);
 					$("#choice" + (i+1)).html("<img src='" + reply[i].profile_image_url_https + "' alt='Error getting pic' class='profilepic'>");
 					if(reply[i].screen_name === correct) {
@@ -235,11 +238,11 @@ function receiveTweet(tweet, username, name) {
 function sanitizeTweet(tweet, username, name) {
 	var cleanTweet = tweet;
 	cleanTweet.replace(username, "{username hidden}");
-	cleanTweet.replace(name, "{full name hidden}");
+	/*cleanTweet.replace(name, "{full name hidden}");
 	var nameParts = name.split(" ");
 	for(var i=0; i<nameParts.length; i++) {
 		cleanTweet.replace(nameParts[i], "{partial name hidden}");
-	}
+	}*/
 	return cleanTweet;
 }
 
