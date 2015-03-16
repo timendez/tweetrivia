@@ -44,7 +44,7 @@ function callback(){
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
 
-            alert(reply.profile_image_url+" "+profile_image_url_https);
+            alert(reply.profile_image_url+" "+reply.profile_image_url_https);
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
             document.getElementByID('profPic').src =  reply.profile_image_url;
             alert(reply.profile_image_url);
