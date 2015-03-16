@@ -44,10 +44,8 @@ function callback(){
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
 
-            alert(reply.profile_image_url+" "+reply.profile_image_url_https);
+            
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
-            document.getElementByID('profPic').src =  reply.profile_image_url;
-            alert(reply.profile_image_url);
             username = reply.screen_name;
             document.getElementById("login").style.visibility = "hidden";
             $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
@@ -55,6 +53,16 @@ function callback(){
             // consider storing the token in a cookie or HTML5 local storage
         }
     );
+    cb.__call(
+    "account_verifyCredentials",
+    {},
+    function (reply) {
+        alert(reply.profile_image_url+" "+reply.profile_image_url_https);
+        document.getElementByID('profPic').src =  reply.profile_image_url;
+            alert(reply.profile_image_url);
+
+    }
+);
 //-------------------------------
 
 }
