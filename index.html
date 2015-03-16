@@ -21,7 +21,10 @@
 			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();" style="position:relative">
 			<script type="text/javascript">
         if(localStorage["cb"] && localStorage["screenName"] && localStorage["profPicURL"] ) {
-          //setPic(localStorage["screenName"], localStorage["profPicURL"],localStorage["cb"]);
+          document.getElementById('username').innerHTML = "Yooo "+ localStorage["screenName"]+"!!!!";
+        document.getElementById("login").style.visibility = "hidden";
+        $("#leaderboardLink").attr("href", "leaderboard.html?user=" + localStorage["screenName"]);
+        document.getElementById('profPic').src = localStorage["profPicURL"];
         }
         else {
 			  init(
