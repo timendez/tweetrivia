@@ -236,7 +236,7 @@ function receiveTweet(tweet, username, name) {
 function sanitizeTweet(tweet, username, name) {
 	var cleanTweet = tweet;
 	cleanTweet.replace(username, "{username hidden}");
-	.replace(name, "{full name hidden}");
+	replace(name, "{full name hidden}");
 	var nameParts = name.split(" ");
 	for(var i=0; i<nameParts.length; i++) {
 		cleanTweet.replace(nameParts[i], "{partial name hidden}");
