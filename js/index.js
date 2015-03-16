@@ -101,20 +101,24 @@ function receiveChoices(receivedChoices) {
 	correct = choices[random];
 	
 	// get user pics to display on buttons with username
-	var correctRealName;
+	var correctRealName = "YCAMOLPID";
 	cb.__call(
 		"users_lookup",
 		"screen_name=" + choices[0] + "," + choices[1] + "," + choices[2] + "," + choices[3],
 		function (reply, rate_limit_status) {
 			if(reply !== undefined) {
 				// display usernames and profile pics on choice buttons
+				console.log("reply.length=" + reply.length);
 				for(var i=0; i < reply.length; i++) {
-					var elementSpecifier = "#choice" + i.toString();
+					//console.log("choice " + i.toString());
+					var elementSpecifier = "#choice" + (i + 1).toString();
 					$(elementSpecifier).html(reply[i].name + "<br>" + choices[i]);
-					$(elementSpecifier).html("<img src='" + reply[i].profile_image_url_https + "' alt='Error getting pic' class='profilepic'>");
-					if(reply[i].screen_name === correct) {
-						correctRealName = reply[i].name;
-					}
+					$(elementSpecifier).prepend("<img src='" + reply[i].profile_image_url_https + "' alt='Error getting pic' class='profilepic'>");
+					console.log("elementSpecifier=" + elementSpecifier);
+					/*if(reply[i].screen_name === correct) {
+						console.log("setting correctRealName=" + reply[i].name.toString());
+						correctRealName = reply[i].name.toString();
+					}*/
 				}
 			}
 			else {
@@ -236,15 +240,16 @@ function receiveTweet(tweet, username, name) {
 function sanitizeTweet(tweet, username, name) {
 	var cleanTweet = tweet;
 	cleanTweet.replace(username, "{username hidden}");
-	cleanTweet.replace(name, "{full name hidden}");
+	/*cleanTweet.replace(name, "{full name hidden}");
 	var nameParts = name.split(" ");
 	for(var i=0; i<nameParts.length; i++) {
 		cleanTweet.replace(nameParts[i], "{partial name hidden}");
-	}
+	}*/
 	return cleanTweet;
 }
 
 function getTweet(username, name) {
+	console.log("name received: " + name);
 	cb.__call(
 		"statuses_userTimeline",
 		"screen_name=" + username + "&count=100&exclude_replies=true&include_rts=false&trim_user=true",
