@@ -10,6 +10,8 @@ var correctResponses = ["Correct!", "Nice!", "You got it!", "Right on!", "Yeah b
 var correct = null;
 var gameInProgress = false;
 var buttonSoundEffect;
+var correctFullName;
+var waitTimeoutId;
 
 $(document).ready(function() {
 	cb = new Codebird();
@@ -99,26 +101,23 @@ function receiveChoices(receivedChoices) {
 	// randomly select one to be the correct answer
 	var random = getRandomInt(0,3);
 	correct = choices[random];
+	correctFullName = "CORRECT_FULL_NAME_NOT_SET"; // this needs to always be before the call to getTweet()
 	
 	// get user pics to display on buttons with username
-	var correctRealName = "YCAMOLPID";
 	cb.__call(
 		"users_lookup",
 		"screen_name=" + choices[0] + "," + choices[1] + "," + choices[2] + "," + choices[3],
 		function (reply, rate_limit_status) {
 			if(reply !== undefined) {
 				// display usernames and profile pics on choice buttons
-				console.log("reply.length=" + reply.length);
 				for(var i=0; i < reply.length; i++) {
 					//console.log("choice " + i.toString());
 					var elementSpecifier = "#choice" + (i + 1).toString();
 					$(elementSpecifier).html(reply[i].name + "<br>" + choices[i]);
 					$(elementSpecifier).prepend("<img src='" + reply[i].profile_image_url_https + "' alt='Error getting pic' class='profilepic'>");
-					console.log("elementSpecifier=" + elementSpecifier);
-					/*if(reply[i].screen_name === correct) {
-						console.log("setting correctRealName=" + reply[i].name.toString());
-						correctRealName = reply[i].name.toString();
-					}*/
+					if(reply[i].screen_name === correct) {
+						correctFullName = reply[i].name.toString();
+					}
 				}
 			}
 			else {
@@ -129,7 +128,7 @@ function receiveChoices(receivedChoices) {
 	);
 	
 	// get a tweet from the user we chose to be correct answer
-	getTweet(correct, correctRealName);
+	getTweet(correct);
 	
 	// the rest of the process is continued in the receiveTweet()
 	// function called by the callback in getTweet
@@ -230,26 +229,49 @@ function applicationOnlyAuth() {
 	);
 }
 
-function receiveTweet(tweet, username, name) {
-   var safeTweet = sanitizeTweet(tweet, username, name);
-
-	animateShow(safeTweet);
-	start();
+function receiveTweet(tweet) {
+	// Wait until correctFullName has been set
+	waitTimeoutId = setInterval(function() {
+		if(correctFullName !== "CORRECT_FULL_NAME_NOT_SET") {
+			clearTimeout(waitTimeoutId);
+			var safeTweet = sanitizeTweet(tweet, correct, correctFullName);
+			animateShow(safeTweet);
+			start();
+		}
+	}, 100);
 }
 
-function sanitizeTweet(tweet, username, name) {
+function sanitizeTweet(tweet, username, fullname) {
 	var cleanTweet = tweet;
-	cleanTweet.replace(username, "{username hidden}");
-	/*cleanTweet.replace(name, "{full name hidden}");
-	var nameParts = name.split(" ");
+	cleanTweet = cleanTweet.replace(username, "<username>");
+	cleanTweet = cleanTweet.replace(fullname, "<full name>");
+	//cleanTweet = cleanTweet.replace(/\uFFFD/g, ''); //removes unknown characters
+	cleanTweet = cleanTweet.replace(/https?:\/\/t.co\/[^\s]*/g, '{link}');
+	var nameParts = fullname.split(" ");
 	for(var i=0; i<nameParts.length; i++) {
-		cleanTweet.replace(nameParts[i], "{partial name hidden}");
-	}*/
+		if(nameParts[i] === " " || nameParts[i] === "") {
+			nameParts.splice(i,1);
+		}
+	}
+	console.log("nameParts=" + nameParts.toString());
+	for(var i=0; i<nameParts.length; i++) {
+		var replacementText = "<partial name>";
+		if(nameParts.length == 2) {
+			if(i==0){
+				replacementText = "{first name}";
+			}
+			else if(i==1) {
+				replacementText = "{last name}";
+			}
+		}
+		cleanTweet = cleanTweet.replace(nameParts[i], replacementText);
+	}
 	return cleanTweet;
 }
 
-function getTweet(username, name) {
-	console.log("name received: " + name);
+
+
+function getTweet(username) {
 	cb.__call(
 		"statuses_userTimeline",
 		"screen_name=" + username + "&count=100&exclude_replies=true&include_rts=false&trim_user=true",
@@ -260,7 +282,7 @@ function getTweet(username, name) {
 				if(randomNumber === reply.length) {
 					randomNumber = randomNumber - 1;
 				}
-				receiveTweet(reply[randomNumber].text, username, name);
+				receiveTweet(reply[randomNumber].text);
 			}
 			else {
 				console.log("Failed to retrieve any tweets. Trying again.");
@@ -295,6 +317,7 @@ function checkTime(){
    }
 }
 function start(){
+	clearInterval(waitTimeoutId);
    $("#newHighscore").addClass("hide");
    $("#timer").attr("min", 0);
    $("#timer").attr("max", timePerQuestion);
