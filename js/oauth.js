@@ -45,6 +45,8 @@ function callback(){
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
             document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
+            document.getElementByID('profPic').src =  reply.profile_image_url;
+            alert(reply.profile_image_url);
             username = reply.screen_name;
             document.getElementById("login").style.visibility = "hidden";
             $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
