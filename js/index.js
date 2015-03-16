@@ -243,8 +243,10 @@ function receiveTweet(tweet) {
 
 function sanitizeTweet(tweet, username, fullname) {
 	var cleanTweet = tweet;
-	cleanTweet = cleanTweet.replace(username, "<username>");
-	cleanTweet = cleanTweet.replace(fullname, "<full name>");
+	var usernameRegExp = new RegExp(username, "ig");
+	cleanTweet = cleanTweet.replace(usernameRegExp, "<username>");
+	var fullnameRegExp = new RegExp(fullname, "ig");
+	cleanTweet = cleanTweet.replace(fullnameRegExp, "<full name>");
 	//cleanTweet = cleanTweet.replace(/\uFFFD/g, ''); //removes unknown characters
 	cleanTweet = cleanTweet.replace(/https?:\/\/t.co\/[^\s]*/g, '{link}');
 	var nameParts = fullname.split(" ");
@@ -264,8 +266,10 @@ function sanitizeTweet(tweet, username, fullname) {
 				replacementText = "{last name}";
 			}
 		}
-		cleanTweet = cleanTweet.replace(nameParts[i], replacementText);
+		var partialnameRegExp = new RegExp(nameParts[i], "ig");
+		cleanTweet = cleanTweet.replace(partialnameRegExp, replacementText);
 	}
+	console.log(cleanTweet);
 	return cleanTweet;
 }
 
