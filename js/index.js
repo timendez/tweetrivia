@@ -101,22 +101,20 @@ function receiveChoices(receivedChoices) {
 	correct = choices[random];
 	
 	// get user pics to display on buttons with username
+	var correctRealName;
 	cb.__call(
 		"users_lookup",
 		"screen_name=" + choices[0] + "," + choices[1] + "," + choices[2] + "," + choices[3],
 		function (reply, rate_limit_status) {
 			if(reply !== undefined) {
-				// display usernames
-				$("#choice1").html(reply[0].name + "<br>" + choices[0]);
-				$("#choice2").html(reply[1].name + "<br>" + choices[1]);
-				$("#choice3").html(reply[2].name + "<br>" + choices[2]);
-				$("#choice4").html(reply[3].name + "<br>" + choices[3]);
-			
-				// display profile pic
-				$("#choice1").prepend("<img src='" + reply[0].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
-				$("#choice2").prepend("<img src='" + reply[1].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
-				$("#choice3").prepend("<img src='" + reply[2].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
-				$("#choice4").prepend("<img src='" + reply[3].profile_image_url_https + "' alt='Couldn't retrieve profile pic' class='profilepic'>");
+				// display usernames and profile pics on choice buttons
+				for(var i=0; i < reply.length; i++) {
+					$("#choice" + (i+1)).html(reply[i].name + "<br>" + choices[i]);
+					$("#choice" + (i+1)).html("<img src='" + reply[i].profile_image_url_https + "' alt='Error getting pic' class='profilepic'>");
+					if(reply[i].screen_name === correct) {
+						correctRealName = reply[i].name;
+					}
+				}
 			}
 			else {
 				alert("Twitter API is not responding!");
@@ -126,7 +124,7 @@ function receiveChoices(receivedChoices) {
 	);
 	
 	// get a tweet from the user we chose to be correct answer
-	getTweet(correct);
+	getTweet(correct, correctRealName);
 	
 	// the rest of the process is continued in the receiveTweet()
 	// function called by the callback in getTweet
@@ -227,21 +225,28 @@ function applicationOnlyAuth() {
 	);
 }
 
-function receiveTweet(tweet, user) {
-   var safeTweet = sanitizeTweet(tweet);
+function receiveTweet(tweet, username, name) {
+   var safeTweet = sanitizeTweet(tweet, username, name);
 
 	animateShow(safeTweet);
 	start();
 }
 
-function sanitizeTweet(tweet, user) {
-   return tweet.replace(user, "{user}");
+function sanitizeTweet(tweet, username, name) {
+	var cleanTweet = tweet;
+	cleanTweet.replace(username, "{username hidden}");
+	cleanTweet.replace(name, "{full name hidden}");
+	var nameParts = name.split(" ");
+	for(var i=0; i<nameParts.length; i++) {
+		cleanTweet.replace(nameParts[i], "{partial name hidden}");
+	}
+	return cleanTweet;
 }
 
-function getTweet(user) {
+function getTweet(username, name) {
 	cb.__call(
 		"statuses_userTimeline",
-		"screen_name=" + user + "&count=100&exclude_replies=true&include_rts=false&trim_user=true",
+		"screen_name=" + username + "&count=100&exclude_replies=true&include_rts=false&trim_user=true",
 		function (reply, rate_limit_status) {
 			console.log(rate_limit_status);
 			if(reply.length > 0) {
@@ -249,7 +254,7 @@ function getTweet(user) {
 				if(randomNumber === reply.length) {
 					randomNumber = randomNumber - 1;
 				}
-				receiveTweet(reply[randomNumber].text, user);
+				receiveTweet(reply[randomNumber].text, username, name);
 			}
 			else {
 				console.log("Failed to retrieve any tweets. Trying again.");
