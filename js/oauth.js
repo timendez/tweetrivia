@@ -42,14 +42,9 @@ function callback(){
         },
         function (reply) {
             cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-
-            
-            document.getElementById('username').innerHTML = "Yooo "+ reply.screen_name+"!!!!";
             username = reply.screen_name;
             alert(username);
             setPic(username, cb);
-            document.getElementById("login").style.visibility = "hidden";
-            $("#leaderboardLink").attr("href", "leaderboard.html?user=" + reply.screen_name);
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
         }
@@ -58,14 +53,19 @@ function callback(){
 
 }
 
-function setPic(screenName, cb) {
+function setPic(screenName, URL, cb) {
 
     cb.__call(
     "users_show",
     "screen_name="+username,
     function (reply) {
+        document.getElementById('username').innerHTML = "Yooo "+ screenName+"!!!!";
+        document.getElementById("login").style.visibility = "hidden";
+        $("#leaderboardLink").attr("href", "leaderboard.html?user=" + screenName);
         document.getElementById('profPic').src =  reply.profile_image_url_https;
-            alert(reply.profile_image_url_https);
+            localStorage["screenName"] =  screenName;
+            localStorage["profPicURL"] =  reply.profile_image_url_https;
+            localStorage["cb"] =  cb;
 
     }
 );

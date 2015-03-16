@@ -20,10 +20,16 @@
       <img src = "" id = "profPic">
 			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();" style="position:relative">
 			<script type="text/javascript">
+        if(localStorage["screenName"] && localStorage["profPicURL"]) {
+          setPic(localStorage["screenName"], localStorage["profPicURL"],localStorage["cb"]);
+        }
+        else {
 			  init(
 				{callback_function: callback}
 				 );
+      }
 			</script>
+
 		</div>
 		<div style="float:left" id="categoryDiv">
 			<label for="categorySelect" id="categorySelectLabel" class="whiteText">Select a category</label>
