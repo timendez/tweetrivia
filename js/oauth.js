@@ -64,9 +64,8 @@ function setPic(screenName, cb) {
     "users_show",
     "screen_name="+username,
     function (reply) {
-        alert(reply.profile_image_url+" "+reply.profile_image_url_https);
-        document.getElementByID('profPic').src =  reply.profile_image_url;
-            alert(reply.profile_image_url);
+        document.getElementById('profPic').src =  reply.profile_image_url_https;
+            alert(reply.profile_image_url_https);
 
     }
 );
