@@ -611,3 +611,7 @@ function logout() {
    $("#logout").hide();
    location.reload();
 }
+
+function hideButton() {
+   $("#logout").hide();
+}
