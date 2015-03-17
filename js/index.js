@@ -613,5 +613,6 @@ function logout() {
 }
 
 function hideButton() {
-   $("#logout").hide();
+   if(localStorage.getItem("screenName") !== undefined)
+      $("#logout").hide();
 }
