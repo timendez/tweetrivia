@@ -12,7 +12,7 @@ function getTopScores(category) {
    
    query.equalTo("category", category);
    query.addDescending("highscore");
-   query.count(numToGet);
+   query.limit(numToGet);
 
    query.find({
       success: function(objectArr) {
@@ -105,6 +105,8 @@ function getHighScore(user, category) {
       success: function(object) {
          if(object !== undefined)
             receiveFollowingScores(object.get("highscore"));
+         else
+            hideFollowingScore();
       },
       error: function(object) {
          return false;

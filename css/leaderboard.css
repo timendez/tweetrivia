@@ -46,3 +46,10 @@ table {
    -1px 1px 0 #fff,
    1px 1px 0 #fff !important;
 }
+
+#highScoreDiv2 {
+	display:block; 
+	height: 30px;
+	margin: 0px auto 0px auto;
+	padding-top: 11px;
+}

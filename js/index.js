@@ -428,7 +428,12 @@ function checkTime(){
 		timeI = checkI = false;
 
 		if(username !== undefined) {
-			checkHighscore(username, selectedCategory, score);
+         if(selectedGameMode === "normal") {
+            checkHighscore(username, selectedCategory, score);
+         }
+         else {
+            checkHighscore(username, selectedCategory + "Inverted", score);
+         }
 		}
 	}
 }
@@ -494,24 +499,29 @@ function answer(str) {
       score = document.getElementById("scoreVal").innerHTML;
       score++;
       document.getElementById("scoreVal").innerHTML = score;
-	  displayCorrect();
+      displayCorrect();
       clearInterval(timeI);
       clearInterval(checkI);
-	  clearInterval(waitTimeoutId);
+      clearInterval(waitTimeoutId);
       timeI = checkI = false;
       loadNewQuestion();
    }
    else {
       score = document.getElementById("scoreVal").innerHTML;
       displayWrong();
-	  gameInProgress = false;
+      gameInProgress = false;
       clearInterval(timeI);
       clearInterval(checkI);
-	  clearInterval(waitTimeoutId);
+      clearInterval(waitTimeoutId);
       timeI = checkI = false;
       
       if(username !== undefined) {
-         checkHighscore(username, selectedCategory, score);
+         if(selectedGameMode === "normal") {
+            checkHighscore(username, selectedCategory, score);
+         }
+         else {
+            checkHighscore(username, selectedCategory + "Inverted", score);
+         }
 	  }
    }
 }
@@ -527,7 +537,6 @@ function openLeaderboard() {
 		window.location.href = "leaderboard.html?user=" + username;
 		clearTimeout(timeoutID);
 	}, 150);
-
 }
 
 function displayCorrect() {

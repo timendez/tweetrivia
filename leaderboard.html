@@ -8,6 +8,14 @@
    </head>
    
    <body onload="parseInit();populateLeaderboards();">
+      <div id="highScoreDiv2">
+			<button id="leaderboardButton2" class="roundedBlueButton" onClick="playButtonSoundEffect(); invertScores();">
+				View Inverted High Scores
+			</button>
+         
+         <button id="backButton" class="roundedOrangeButton" onClick="playButtonSoundEffect(); goback();">Back</button>
+		</div>
+      
       <div id="followingScore"></div>
 <br><br><br>
 
@@ -34,9 +42,9 @@
             <th>Score</th>
          </tr>
       </table>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <table id="NFLLeaderboard" style="width:14%">
-         <caption id="corporationCaption">NFL</caption>
+         <caption id="nflCaption">NFL</caption>
          <tr id="NFLTR">
             <th>User</th>
             <th>Score</th>
@@ -44,7 +52,7 @@
       </table>
 
       <table id="nbaLeaderboard" style="width:14%">
-         <caption id="corporationCaption">NBA</caption>
+         <caption id="nbaCaption">NBA</caption>
          <tr id="nbaTR">
             <th>User</th>
             <th>Score</th>
@@ -52,7 +60,7 @@
       </table>
 
       <table id="soccerLeaderboard" style="width:14%">
-         <caption id="corporationCaption">Soccer</caption>
+         <caption id="soccerCaption">Soccer</caption>
          <tr id="SoccerTR">
             <th>User</th>
             <th>Score</th>
