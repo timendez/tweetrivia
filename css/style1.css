@@ -329,7 +329,7 @@ button:focus {
 }
 #login {
 	 position:relative;
-        float:left;
+        float:right;
 	right: 100px;
 	top: 33px;
 }
