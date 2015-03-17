@@ -16,10 +16,9 @@
 </head>
 <body onload="parseInit(); hideButton();" style="blue">
 	<div id="headerMenu" class="comicFont">
-      <div class="loginDiv">
-      <button style="float:right" id="logout" class="roundedBlueButton" onclick="playButtonSoundEffect(); logout();">Logout</button>
-		<div style="float:right" id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
-      <img style="float:right" src = ""  id = "profPic">
+		<div style="float:right" id="loginDiv">
+			<div id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
+      <img src = ""  id = "profPic">
 			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();">
 			<script type="text/javascript">
         if(localStorage["cb"] && localStorage["screenName"] && localStorage["profPicURL"] ) {
@@ -34,8 +33,8 @@
 				 );
       }
 			</script>
-</div>
-      
+      <button id="logout" class="roundedBlueButton" onclick="playButtonSoundEffect(); logout();">Logout</button>
+		</div>
 		<div style="float:left" id="categoryDiv">
 			<div style="float:left">
 				<label for="gameModeSelect" id="gameModeSelectLabel" class="whiteText">Choose a game mode &nbsp</label>
