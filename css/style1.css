@@ -318,17 +318,15 @@ button:focus {
 }
 
 #profPic {
-	display: inline;
-	right: 15px;
-	top: 10px;
+	position: absolute;
+   right: 0px;
+   top: 0px;
 }
 #username {
-	display: relative;
-	margin-right: 20px;
-	margin-top: 5px;
+   right:90px;
+   top: 10px;
 }
 #login {
-	display: block;
-	position: relative;
-	margin-left: 15px;
+   right: 100px;
+   top: 33px;
 }
