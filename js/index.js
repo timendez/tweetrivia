@@ -92,11 +92,9 @@ $(document).ready(function() {
 		$("#login").addClass("blackBorder");
 	});
    
-   var indexOfUser = document.URL.indexOf("?user=");
-   var urlIndexPadding = 6;
-   
-   if(indexOfUser !== -1)
-      username = document.URL.substring(indexOfUser + urlIndexPadding);
+
+   if(localStorage["screenName"]  !== undefined)
+      username = localStorage["screenName"];
 	
 	// Only needed to do this once to obtain the bearer token. Now it's hard coded. 
     //applicationOnlyAuth();
