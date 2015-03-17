@@ -608,11 +608,11 @@ function displayTimeUp() {
 
 function logout() {
    localStorage.removeItem("screenName");
-   $("#logout").hide();
    location.reload();
+   $("#logout").hide();
 }
 
 function hideButton() {
-   if(localStorage.getItem("screenName") === undefined)
+   if(username === undefined)
       $("#logout").hide();
 }
