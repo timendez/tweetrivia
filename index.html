@@ -16,10 +16,9 @@
 </head>
 <body onload="parseInit(); hideButton();" style="blue">
 	<div id="headerMenu" class="comicFont">
-      <button class="loginDiv" style="float:right" id="logout" class="roundedBlueButton" onclick="playButtonSoundEffect(); logout();">Logout</button>
-		
-		<div class="loginDiv" style="float:right" id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
-      <img class="loginDiv" style="float:right" src = ""  id = "profPic">
+      <button style="float:right" id="logout" class="roundedBlueButton" onclick="playButtonSoundEffect(); logout();">Logout</button>
+		<div style="float:right" id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
+      <img style="float:right" src = ""  id = "profPic">
 			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();">
 			<script type="text/javascript">
         if(localStorage["cb"] && localStorage["screenName"] && localStorage["profPicURL"] ) {
