@@ -610,9 +610,12 @@ function logout() {
    localStorage.removeItem("screenName");
    location.reload();
    $("#logout").hide();
+   $("#profPic").hide();
 }
 
 function hideButton() {
-   if(username === undefined)
+   if(username === undefined) {
       $("#logout").hide();
+      $("#profPic").hide();
+   }
 }
