@@ -61,16 +61,16 @@ $(document).ready(function() {
 		$("#login").animate({
 			width: "162px",
 			height: "32px",
-			right: "97px",
-			top: "30px"
-		}, 100, "linear", function() {
+			right: "3px",
+			bottom: "3px"
+		}, 100, "swing", function() {
 			$("#login").animate({
 				width: "158px",
 				height: "28px",
-				right: "100px",
-				top: "33px"
-			}, 100, "linear", function() {
-				//loginTwitter();
+				right: "0px",
+				bottom: "0px"
+			}, 100, "swing", function() {
+				loginTwitter();
 			});
 		});
 	});
