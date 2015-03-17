@@ -318,17 +318,17 @@ button:focus {
 }
 
 #profPic {
-	position: absolute;
+	display: inline;
 	right: 15px;
 	top: 10px;
 }
 #username {
-	position: absolute;
+	display: inline;
 	right: 90px;
 	top: 10px;
 }
 #login {
-	position: absolute;
+	display: inline;
 	right: 100px;
 	top: 33px;
 }
