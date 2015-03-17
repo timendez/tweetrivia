@@ -1,4 +1,4 @@
-var timeI, checkI;
+﻿var timeI, checkI;
 var timePerQuestion = 20;
 var cb; //codebird object
 var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
