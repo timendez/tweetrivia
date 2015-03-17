@@ -103,8 +103,8 @@ function getHighScore(user, category) {
    
    query.first({
       success: function(object) {
-         //TODO Call function elsewhere rather than return
-         //return object.get("highscore");
+         if(object !== undefined)
+            receiveFollowingScores(object.get("highscore"));
       },
       error: function(object) {
          return false;

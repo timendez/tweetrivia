@@ -6,7 +6,24 @@ table {
    color:white;
    font-family: Tahoma, sans-serif;
    font-weight: bold;
-   margin-left: 2.5%;
+   margin-left: 14.2%;
+   padding-left: .5%;
+   padding-right: .5%;
+   float: left;
+   
+   /* Black Outline */
+   text-shadow:
+   -1px -1px 0 #000,
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+   1px 1px 0 #000;
+}
+
+#followingScore {
+   color:white;
+   font-family: Tahoma, sans-serif;
+   font-weight: bold;
+   margin-left: 39%;
    padding-left: .5%;
    padding-right: .5%;
    float: left;

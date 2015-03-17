@@ -259,6 +259,9 @@ function loadNewQuestion(retry) {
 		}
 	}
 
+	// get mode user selected
+	selectedMode = $("#modeSelect option:selected").val();
+
 	// get 4 Twitter account names from the selected category
 	getChoices(selectedCategory);
 	
@@ -464,8 +467,8 @@ function restart(){
    clearInterval(checkI);
    clearInterval(waitTimeoutId);
    timeI = checkI = false;
-   var gameMode = $("#gameModeSelect option:selected").val();
-	loadNewQuestion();
+   $("#middle").removeClass("hide");
+   loadNewQuestion();
 }
 
 function answer(str) {
