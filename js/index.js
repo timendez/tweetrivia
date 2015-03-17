@@ -206,6 +206,9 @@ function loadNewQuestion() {
 	// get category user selected
 	selectedCategory = $("#categorySelect option:selected").val();
 
+	// get mode user selected
+	selectedMode = $("#modeSelect option:selected").val();
+
 	// get 4 Twitter account names from the selected category
 	getChoices(selectedCategory);
 	
@@ -351,6 +354,7 @@ function restart(){
    clearInterval(timeI);
    clearInterval(checkI);
    timeI = checkI = false;
+   $("#middle").removeClass("hide");
    loadNewQuestion();
 }
 
