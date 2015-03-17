@@ -605,3 +605,8 @@ function displayTimeUp() {
 		alert("selectedGameMode not set. This should not happen!");
 	}
 }
+
+function logout() {
+   localStorage.removeItem("screenName");
+   location.reload();
+}
