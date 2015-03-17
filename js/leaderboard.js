@@ -4,7 +4,7 @@ var buttonSoundEffect = new Audio("sound/buttonSound.mp3");
 
 function goback() {
    var timeoutID = setTimeout(function() {
-		window.location.href = "index.html";
+		window.location.href = "index.html?user=" + username;
 		clearTimeout(timeoutID);
 	}, 150);
 }
