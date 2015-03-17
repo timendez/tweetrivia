@@ -150,7 +150,7 @@ button:focus {
 	padding-top: 11px;
 }
 
-.loginDiv {
+#loginDiv {
 	margin-top: -4px;
 }
 
@@ -318,15 +318,17 @@ button:focus {
 }
 
 #profPic {
-	position: absolute;
-   right: 0px;
-   top: 0px;
+	display: inline;
+	right: 15px;
+	top: 10px;
 }
 #username {
-   right:90px;
-   top: 10px;
+	display: relative;
+	margin-right: 20px;
+	margin-top: 5px;
 }
 #login {
-   right: 100px;
-   top: 33px;
+	display: block;
+	position: relative;
+	margin-left: 15px;
 }
