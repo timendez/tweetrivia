@@ -9,6 +9,7 @@
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+	padding: 0px;
 }
 
 input:focus,
@@ -53,9 +54,16 @@ button:focus {
    text-align:center;
 }
 
-.choiceButton {
+.choiceButtonNormal {
 	width: 300px;
 	height: 70px;
+	position: relative;
+	margin: 0px 10px 0px 10px;
+}
+
+.choiceButtonInverted {
+	width: 350px;
+	height: 120px;
 	position: relative;
 	margin: 0px 10px 0px 10px;
 }
@@ -120,11 +128,17 @@ button:focus {
 	margin: 0px;
 }
 
-#categorySelect {
+.questionProfilePic {
+	width: 70px;
+	height: 70px;
+}
+
+.selectBox {
 	width: 140px;
 }
 
 #categoryDiv {
+	padding: 0px;
 	margin-top: -5px;
 }
 
@@ -133,7 +147,7 @@ button:focus {
 	width:165px; 
 	height: 30px;
 	margin: 0px auto 0px auto;
-	padding-top: 18px;
+	padding-top: 11px;
 }
 
 #loginDiv {

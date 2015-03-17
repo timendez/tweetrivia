@@ -170,7 +170,7 @@ function getChoices(category) {
             handles[i] = object[i].get("handle");
          }
 
-         receiveChoices(getFour(handles));
+         receiveChoices(getRandomHandles(handles, 4));
       },
       error: function (error) {
          return false; //DB down
@@ -178,14 +178,13 @@ function getChoices(category) {
    });
 }
 
-
 //Grabs and returns 4 random handles from all handles given
-function getFour(allHandles) {
+function getRandomHandles(allHandles, num) {
    var fourHandles = [];
    var usedIndexes = [];
    var count = 0;
 
-   while(count < 4) {
+   while(count < num) {
 	   var randomIndex = getRandomInt(0, allHandles.length - 1);
 	   if($.inArray(randomIndex, usedIndexes) == -1) {
 		   usedIndexes.push(randomIndex);
