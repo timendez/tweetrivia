@@ -154,28 +154,50 @@ function saveAccount(account, category) {
 function getChoices(category) {
    var query = new Parse.Query("Account");
    var handles = [];
-
-   //Setting query to get all accounts within categories
-   query.equalTo("category", category);
-   
-   query.find({
-      success: function(object) { //Successfully retrieved data
-
-         //Object = undefined signifies category does not exist
-         if(object === undefined) {
-            return false;
-         }
-
-         for(var i = 0; i < object.length; i++) {
-            handles[i] = object[i].get("handle");
-         }
-
-         receiveChoices(getFour(handles));
-      },
-      error: function (error) {
-         return false; //DB down
+   if(category == "following") {
+      if(localStorage["screenName"]) {
+         var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
+         cb = new Codebird();
+         cb.setBearerToken(bearerToken);
+         cb.__call(
+            "friends_list",
+            "screen_name="+localStorage["screenName"],
+            function (reply) {
+                for(var i = 0; i < reply.users.length; i++) {
+                  handles[i] = reply.users[i].screen_name;
+               }
+               receiveChoices(getFour(handles));
+            }
+         );
       }
-   });
+      else {
+         alert("You must sign in to play this category!")
+      }
+
+   }
+   else {
+   //Setting query to get all accounts within categories
+      query.equalTo("category", category);
+   
+      query.find({
+         success: function(object) { //Successfully retrieved data
+
+            //Object = undefined signifies category does not exist
+            if(object === undefined) {
+               return false;
+            }
+
+            for(var i = 0; i < object.length; i++) {
+               handles[i] = object[i].get("handle");
+            }
+
+            receiveChoices(getFour(handles));
+         },
+         error: function (error) {
+            return false; //DB down
+         }
+      });
+   }
 }
 
 
