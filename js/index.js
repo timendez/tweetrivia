@@ -613,6 +613,6 @@ function logout() {
 }
 
 function hideButton() {
-   if(localStorage.getItem("screenName") !== undefined)
+   if(localStorage.getItem("screenName") === undefined)
       $("#logout").hide();
 }
