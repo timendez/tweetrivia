@@ -327,8 +327,8 @@ button:focus {
 	right: 90px;
 	top: 10px;
 }
-#signInButton {
+#login {
 	position: absolute;
 	right: 15px;
-	top: 35px;
+	top: 25px;
 }
