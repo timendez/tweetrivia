@@ -13,6 +13,9 @@ function populateLeaderboards() {
    
    if(indexOfUser !== -1)
       username = document.URL.substring(indexOfUser + urlIndexPadding);
+      
+   if(username !== undefined || username !== "undefined")
+      getHighScore(username, "following");
 }
 
 function receiveTopScores(results, category) {
@@ -35,4 +38,8 @@ function receiveTopScores(results, category) {
    }
    
    $("#" + category + "TR").after(tableResults);
+}
+
+function receiveFollowingScores(result) {
+   $("#followingScore").html(username + "'s " + " High Score for \"Following\":&nbsp&nbsp&nbsp" + result);
 }
