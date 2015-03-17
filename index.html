@@ -19,7 +19,7 @@
 		<div style="float:right" id="loginDiv">
 			<div id = "username" class="whiteText">Welcome to Tweetrivia!! </div>
       <img src = ""  id = "profPic">
-			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();" style="position:relative">
+			<img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" id = "login" onclick="playButtonSoundEffect();"  id = "signInButton">
 			<script type="text/javascript">
         if(localStorage["cb"] && localStorage["screenName"] && localStorage["profPicURL"] ) {
           document.getElementById('username').innerHTML = "Yooo "+ localStorage["screenName"]+"!!!!";
