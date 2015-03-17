@@ -45,6 +45,7 @@ function callback(){
             username = reply.screen_name;
             setPic(username,"", cb);
             $("#logout").show();
+            $("#profPic").show();
             // if you need to persist the login after page reload,
             // consider storing the token in a cookie or HTML5 local storage
         }
