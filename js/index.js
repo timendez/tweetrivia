@@ -605,3 +605,14 @@ function displayTimeUp() {
 		alert("selectedGameMode not set. This should not happen!");
 	}
 }
+
+function logout() {
+   localStorage.removeItem("screenName");
+   $("#logout").hide();
+   location.reload();
+}
+
+function hideButton() {
+   if(localStorage.getItem("screenName") === undefined)
+      $("#logout").hide();
+}
