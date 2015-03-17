@@ -155,7 +155,6 @@ function getChoices(category) {
    var query = new Parse.Query("Account");
    var handles = [];
    if(category == "following") {
-      alert("foll category!");
       if(localStorage["screenName"]) {
          var bearerToken = "AAAAAAAAAAAAAAAAAAAAAAiReAAAAAAA8T0Ktx%2FCejokTd41KVNXg%2F4BVpY%3DpwcnM59v7rDOyZ1U2i7gvB1hg8IQxov4icPjwgxvCd99u7TCZR";
          cb = new Codebird();
@@ -165,11 +164,9 @@ function getChoices(category) {
             "friends_list",
             "screen_name="+localStorage["screenName"],
             function (reply) {
-               alert("in succ");
                 for(var i = 0; i < reply.users.length; i++) {
                   handles[i] = reply.users[i].screen_name;
                }
-               alert("goingt to recieve");
                receiveChoices(getFour(handles));
             }
          );
