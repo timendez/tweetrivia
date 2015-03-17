@@ -318,8 +318,9 @@ button:focus {
 }
 
 #profPic {
-	right: 15px;
-	top: 10px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
 }
 #username {
 	right: 90px;
