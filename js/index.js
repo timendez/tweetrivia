@@ -19,6 +19,7 @@ var correctButton;
 var invertedQuestionBoxContent;
 
 $(document).ready(function() {
+   logout.hide();
 	cb = new Codebird();
 	cb.setBearerToken(bearerToken);
 	parseInit();
@@ -608,5 +609,6 @@ function displayTimeUp() {
 
 function logout() {
    localStorage.removeItem("screenName");
+   $("#logout").show();
    location.reload();
 }
