@@ -316,3 +316,19 @@ button:focus {
    float: right;
    color: #FFFF00;
 }
+
+#profPic {
+	position: absolute;
+	right: 15px;
+	top: 10px;
+}
+#username {
+	position: absolute;
+	right: 90px;
+	top: 10px;
+}
+#login {
+	position: absolute;
+	right: 100px;
+	top: 33px;
+}
