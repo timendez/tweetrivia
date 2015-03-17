@@ -10,6 +10,23 @@ function goback() {
 }
 
 function populateLeaderboards() {
+	$("#backButton").mousedown(function() {
+		$("#backButton").removeClass("blackBorder");
+		$("#backButton").addClass("whiteBorder");
+	});
+   
+   $("#leaderboardButton2").mousedown(function() {
+		$("#leaderboardButton2").removeClass("blackBorder");
+		$("#leaderboardButton2").addClass("whiteBorder");
+	});
+   
+   $("body").mouseup(function() {
+		$("#leaderboardButton2").removeClass("whiteBorder");
+		$("#backButton").removeClass("whiteBorder");
+		$("#leaderboardButton2").addClass("blackBorder");
+		$("#backButton").addClass("blackBorder");
+	});
+   
    isInverted = false;
 
    $("#actorCaption").html("Actor");
