@@ -8,12 +8,12 @@
    </head>
    
    <body onload="parseInit();populateLeaderboards();">
+   
       <div id="highScoreDiv2">
+         <button id="backButton" class="roundedOrangeButton" onClick="playButtonSoundEffect(); goback();">Play</button>
 			<button id="leaderboardButton2" class="roundedBlueButton" onClick="playButtonSoundEffect(); invertScores();">
 				View Inverted High Scores
-			</button>
-         
-         <button id="backButton" class="roundedOrangeButton" onClick="playButtonSoundEffect(); goback();">Back</button>
+			</button>         
 		</div>
       
       <div id="followingScore"></div>
